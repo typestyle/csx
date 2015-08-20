@@ -1,0 +1,28 @@
+{
+  "name": "csx",
+  "version": "1.0.0",
+  "description": "CSS + JSX Starter",
+  "main": "csx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basarat/csx.git"
+  },
+  "keywords": [
+    "TypeScript",
+    "JSX",
+    "TSX",
+    "Layout"
+  ],
+  "author": "basaratali@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/basarat/csx/issues"
+  },
+  "homepage": "https://github.com/basarat/csx#readme",
+  "dependencies": {
+    "radium": "^0.13.7"
+  }
+}
