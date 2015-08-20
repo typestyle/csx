@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<!-- Based on https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html -->
+<head>
+    <script src="./react-with-addons.js" charset="utf-8"></script>
+    
+    <script>
+       // mock out commonjs
+       var exports = {};
+    </script>
+    <script src="../csx.js" charset="utf-8"></script>
+    <script>
+        // bring it into global
+        var csx = exports;
+    </script>
+    
+    <style>
+    .demo {
+        background-color: #ccc;
+        padding: 4px;
+        margin: 12px;
+    }
+    .demo div {
+      background-color: white;
+      padding: 12px;
+      margin: 4px;
+    }
+    * {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    code, pre {
+      color: #9f499b;
+      font-family: "Source Code Pro", Monaco, Menlo, Consolas, "Courier New", monospace;
+    }
+    body {
+      font-size: 16px;
+      font-family: "RobotoDraft", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      line-height: 24px;
+      color: #444
+    }
+    h1, h2, h3, h4, h5 {
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 48px;
+      margin: 0;
+    }
+    </style>
+    
+<script src="./demo.js">
+</script>
+    
+</head>
+<body>
+    <div id="container">
+    <!-- This element's contents will be replaced with the react component. -->
+    </div>
+</body>
+</html>
