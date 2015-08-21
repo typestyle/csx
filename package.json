@@ -1,6 +1,6 @@
 {
     "name": "csx",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "CSS + JSX Starter",
     "main": "csx.js",
     "typescript": {

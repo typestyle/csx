@@ -18,7 +18,9 @@ var Demo = React.createClass({
 }
 ```
 
-Checkout the [complete demo](https://basarat.github.io/csx/demo/). 
+Checkout the [complete demo](https://basarat.github.io/csx/demo/).
+
+> Definitely use with [radium](https://github.com/FormidableLabs/radium) for auto browser prefixing.
 
 ## Inspiration
 Inspired by [polymer layout.html](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).
