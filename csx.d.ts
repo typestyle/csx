@@ -1,3 +1,4 @@
+declare module "csx" {
 export declare function extend(...args: any[]): {};
 export declare var flexRoot: {
     display: string;
@@ -122,3 +123,4 @@ export declare var fixed: {
     position: string;
 };
 export declare var fixedBottom: any, fixedLeft: any, fixedRight: any, fixedTop: any;
+}

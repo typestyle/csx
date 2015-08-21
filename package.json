@@ -1,10 +1,10 @@
 {
     "name": "csx",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "CSS + JSX Starter",
     "main": "csx.js",
     "typescript": {
-        "definition": "main.d.ts"
+        "definition": "csx.d.ts"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
