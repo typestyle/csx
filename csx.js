@@ -29,7 +29,8 @@ exports.horizontalReverse = extend(exports.flexRoot, {
     flexDirection: 'row-reverse'
 });
 exports.vertical = extend(exports.flexRoot, {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    maxHeight: '100%'
 });
 exports.verticalReverse = extend(exports.flexRoot, {
     flexDirection: 'column-reverse'

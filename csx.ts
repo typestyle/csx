@@ -29,7 +29,12 @@ horizontalReverse = extend(flexRoot, {
     flexDirection: 'row-reverse'
 });
 vertical = extend(flexRoot, {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    /**
+     * if we don't specify a max height 
+     * then the scroll bar will go on the parent and not some child of this flex container
+     */ 
+    maxHeight:'100%'
 });
 verticalReverse = extend(flexRoot, {
     flexDirection: 'column-reverse'
