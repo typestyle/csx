@@ -11,7 +11,7 @@ var narrowHorizontal = extend(csx.horizontal,{width:'220px'});
 var content = 
 <div>
   <h1>Pure layout. Nothing more. Nothing less.</h1>
-  <div><a href="https://github.com/basarat/csx/blob/gh-pages/demo/demo.jsx">Source</a></div>
+  <div><a href="https://github.com/basarat/csx/blob/gh-pages/demo/demo.tsx">Source</a></div>
       
   <h2>Entice<a class="permalink" title="Permalink" href="#entice">#</a></h2>  
   <p>
