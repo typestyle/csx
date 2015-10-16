@@ -31,9 +31,9 @@ horizontalReverse = extend(flexRoot, {
 vertical = extend(flexRoot, {
     flexDirection: 'column',
     /**
-     * if we don't specify a max height 
+     * if we don't specify a max height
      * then the scroll bar will go on the parent and not some child of this flex container
-     */ 
+     */
     maxHeight:'100%'
 });
 verticalReverse = extend(flexRoot, {
@@ -185,7 +185,7 @@ export var fullBleedBody = {
 };
 
 export var scroll = {
-    'webkitOverflowScrolling': 'touch',
+    // 'webkitOverflowScrolling': 'touch',
     overflow: 'auto'
 };
 
@@ -193,8 +193,8 @@ export var scroll = {
 // Fixed position //
 ////////////////////
 
-/** 
- * You don't generally need to use this. 
+/**
+ * You don't generally need to use this.
  * Instead use fixedBottom,fixedLeft,fixedRight,fixedTop
  */
 export var fixed = {

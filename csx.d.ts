@@ -115,7 +115,6 @@ export declare var fullBleedBody: {
     height: string;
 };
 export declare var scroll: {
-    'webkitOverflowScrolling': string;
     overflow: string;
 };
 export declare var fixed: {

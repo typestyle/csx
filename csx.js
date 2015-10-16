@@ -1,5 +1,3 @@
-// Other vendor prefix support can be provided by external projects like : autoprefixer embedded into "radium"
-// https://github.com/Polymer/layout/blob/master/layout.html
 function extend() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -145,7 +143,6 @@ exports.fullBleedBody = {
     height: '100vh'
 };
 exports.scroll = {
-    'webkitOverflowScrolling': 'touch',
     overflow: 'auto'
 };
 exports.fixed = {
