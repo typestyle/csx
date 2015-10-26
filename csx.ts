@@ -228,6 +228,7 @@ fixedLeft = extend(fixed, {
 //////////////////
 /**
  *  You can have this anywhere and its like you have opened a new body
+ *  This new layer will attach itself to the nearest parent with `position:relative`
  */
 export var newLayer = {
     position: 'absolute',
