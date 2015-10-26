@@ -15,7 +15,7 @@ function extend() {
 exports.extend = extend;
 ;
 exports.flexRoot = {
-    display: 'flex'
+    display: 'flex',
 };
 var inline = {
     display: 'inline-flex'
@@ -168,3 +168,10 @@ exports.fixedLeft = extend(exports.fixed, {
     bottom: 0,
     left: 0,
 });
+exports.newLayer = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+};

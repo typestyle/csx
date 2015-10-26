@@ -14,7 +14,7 @@ export function extend(...args: any[]) {
 
 /** You don't need to use this generally. Prefer horizontal,vertical,horizontalReverse,verticalReverse */
 export var flexRoot = {
-    display: 'flex'
+    display: 'flex',
 };
 
 var inline = {
@@ -222,3 +222,17 @@ fixedLeft = extend(fixed, {
     bottom: 0,
     left: 0,
 });
+
+//////////////////
+// A new layer  //
+//////////////////
+/**
+ *  You can have this anywhere and its like you have opened a new body
+ */
+export var newLayer = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+};

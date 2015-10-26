@@ -121,3 +121,10 @@ export declare var fixed: {
     position: string;
 };
 export declare var fixedBottom: any, fixedLeft: any, fixedRight: any, fixedTop: any;
+export declare var newLayer: {
+    position: string;
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+};
