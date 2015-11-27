@@ -4,8 +4,8 @@ function extend() {
         args[_i - 0] = arguments[_i];
     }
     var newObj = {};
-    for (var _a = 0; _a < args.length; _a++) {
-        var obj = args[_a];
+    for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
+        var obj = args_1[_a];
         for (var key in obj) {
             newObj[key] = obj[key];
         }
@@ -27,8 +27,7 @@ exports.horizontalReverse = extend(exports.flexRoot, {
     flexDirection: 'row-reverse'
 });
 exports.vertical = extend(exports.flexRoot, {
-    flexDirection: 'column',
-    maxHeight: '100%'
+    flexDirection: 'column'
 });
 exports.verticalReverse = extend(exports.flexRoot, {
     flexDirection: 'column-reverse'
