@@ -36,6 +36,21 @@ vertical = extend(flexRoot, {
     flexDirection: 'column'
 });
 
+/**
+ * This is great if you are creating an overlay layer
+ * Just have a *few* constent sized items
+ */
+export const horizontalReverse = extend(flexRoot, {
+    flexDirection: 'row-reverse'
+});
+/**
+ * This is great if you are creating an overlay layer
+ * Just have a *few* constent sized items
+ */
+export const verticalReverse = extend(flexRoot, {
+    flexDirection: 'column-reverse'
+});
+
 export var wrap = {
     flexWrap: 'wrap'
 };

@@ -6,6 +6,8 @@ export declare var inlineRoot: {
     display: string;
 };
 export declare var horizontal: any, vertical: any;
+export declare const horizontalReverse: any;
+export declare const verticalReverse: any;
 export declare var wrap: {
     flexWrap: string;
 };
