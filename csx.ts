@@ -250,7 +250,7 @@ export namespace Box {
      * For `number` we assume pixels e.g. 5 => '5px'
      * For `string` you should provide the unit e.g. '5px'
      */
-    type BoxUnit = number | string;
+    export type BoxUnit = number | string;
     function boxUnitToString(value: BoxUnit): string {
         if (typeof value === 'number') {
             return value.toString() + 'px';
@@ -266,7 +266,7 @@ export namespace Box {
      * - topAndBottom + leftRight
      * - top + right + bottom + left
      */
-    interface BoxFunction<T> {
+    export interface BoxFunction<T> {
         (all: BoxUnit): T;
         (topAndBottom: BoxUnit, leftAndRight: BoxUnit): T;
         (top: BoxUnit, right: BoxUnit, bottom: BoxUnit, left: BoxUnit): T;

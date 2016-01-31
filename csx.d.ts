@@ -1,8 +1,11 @@
-export declare function extend(...args: any[]): {};
+export declare function extend(...args: any[]): any;
 export declare var flexRoot: {
     display: string;
 };
-export declare var horizontal: any, vertical: any, horizontalReverse: any, verticalReverse: any;
+export declare var inlineRoot: {
+    display: string;
+};
+export declare var horizontal: any, vertical: any;
 export declare var wrap: {
     flexWrap: string;
 };
@@ -78,7 +81,7 @@ export declare var aroundJustified: {
 export declare var betweenJustified: {
     justifyContent: string;
 };
-export declare var centerCenter: {};
+export declare var centerCenter: any;
 export declare var selfStart: {
     alignSelf: string;
 };
@@ -121,6 +124,9 @@ export declare var fixed: {
     position: string;
 };
 export declare var fixedBottom: any, fixedLeft: any, fixedRight: any, fixedTop: any;
+export declare var newLayerParent: {
+    position: string;
+};
 export declare var newLayer: {
     position: string;
     left: number;
@@ -128,3 +134,29 @@ export declare var newLayer: {
     top: number;
     bottom: number;
 };
+export declare namespace Box {
+    type BoxUnit = number | string;
+    interface BoxFunction<T> {
+        (all: BoxUnit): T;
+        (topAndBottom: BoxUnit, leftAndRight: BoxUnit): T;
+        (top: BoxUnit, right: BoxUnit, bottom: BoxUnit, left: BoxUnit): T;
+    }
+    const padding: BoxFunction<{
+        paddingTop: string;
+        paddingRight: string;
+        paddingBottom: string;
+        paddingLeft: string;
+    }>;
+    const margin: BoxFunction<{
+        marginTop: string;
+        marginRight: string;
+        marginBottom: string;
+        marginLeft: string;
+    }>;
+    const border: BoxFunction<{
+        borderTop: string;
+        borderRight: string;
+        borderBottom: string;
+        borderLeft: string;
+    }>;
+}

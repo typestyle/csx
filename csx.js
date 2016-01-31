@@ -1,11 +1,18 @@
+"use strict";
 function extend() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i - 0] = arguments[_i];
     }
-    var newObj = {};
     for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
         var obj = args_1[_a];
+        if (obj instanceof Array) {
+            throw new Error("User error: use extend(a,b) instead of extend([a,b]). Object: " + obj);
+        }
+    }
+    var newObj = {};
+    for (var _b = 0, args_2 = args; _b < args_2.length; _b++) {
+        var obj = args_2[_b];
         for (var key in obj) {
             newObj[key] = obj[key];
         }
@@ -17,20 +24,14 @@ exports.extend = extend;
 exports.flexRoot = {
     display: 'flex',
 };
-var inline = {
+exports.inlineRoot = {
     display: 'inline-flex'
 };
 exports.horizontal = extend(exports.flexRoot, {
     flexDirection: 'row'
 });
-exports.horizontalReverse = extend(exports.flexRoot, {
-    flexDirection: 'row-reverse'
-});
 exports.vertical = extend(exports.flexRoot, {
     flexDirection: 'column'
-});
-exports.verticalReverse = extend(exports.flexRoot, {
-    flexDirection: 'column-reverse'
 });
 exports.wrap = {
     flexWrap: 'wrap'
@@ -167,6 +168,9 @@ exports.fixedLeft = extend(exports.fixed, {
     bottom: 0,
     left: 0,
 });
+exports.newLayerParent = {
+    position: 'relative',
+};
 exports.newLayer = {
     position: 'absolute',
     left: 0,
@@ -174,3 +178,57 @@ exports.newLayer = {
     top: 0,
     bottom: 0,
 };
+var Box;
+(function (Box) {
+    function boxUnitToString(value) {
+        if (typeof value === 'number') {
+            return value.toString() + 'px';
+        }
+        else {
+            return value;
+        }
+    }
+    function createBoxFunction(mapFromBox) {
+        var result = function (a, b, c, d) {
+            if (b === undefined && c === undefined && d === undefined) {
+                b = c = d = a;
+            }
+            else if (c === undefined && d === undefined) {
+                c = a;
+                d = b;
+            }
+            var box = {
+                top: boxUnitToString(a),
+                right: boxUnitToString(b),
+                bottom: boxUnitToString(c),
+                left: boxUnitToString(d)
+            };
+            return mapFromBox(box);
+        };
+        return result;
+    }
+    Box.padding = createBoxFunction(function (box) {
+        return {
+            paddingTop: box.top,
+            paddingRight: box.right,
+            paddingBottom: box.bottom,
+            paddingLeft: box.left
+        };
+    });
+    Box.margin = createBoxFunction(function (box) {
+        return {
+            marginTop: box.top,
+            marginRight: box.right,
+            marginBottom: box.bottom,
+            marginLeft: box.left
+        };
+    });
+    Box.border = createBoxFunction(function (box) {
+        return {
+            borderTop: box.top,
+            borderRight: box.right,
+            borderBottom: box.bottom,
+            borderLeft: box.left
+        };
+    });
+})(Box = exports.Box || (exports.Box = {}));
