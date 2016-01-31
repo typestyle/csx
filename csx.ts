@@ -1,7 +1,14 @@
 // Other vendor prefix support can be provided by external projects like : autoprefixer embedded into "radium"
 // https://github.com/Polymer/layout/blob/master/layout.html
 
-export function extend(...args: any[]) {
+export function extend(...args: any[]): any {
+	// Defend against user error
+	for (let obj of args) {
+        if (obj instanceof Array) {
+            throw new Error(`User error: use extend(a,b) instead of extend([a,b]). Object: ${obj}`)
+        }
+    }
+
     var newObj = {};
     for (let obj of args) {
         for (let key in obj) {
@@ -12,27 +19,21 @@ export function extend(...args: any[]) {
     return newObj;
 };
 
-/** You don't need to use this generally. Prefer horizontal,vertical,horizontalReverse,verticalReverse */
+/** If you have more than one child prefer horizontal,vertical */
 export var flexRoot = {
     display: 'flex',
 };
 
-var inline = {
+export var inlineRoot = {
     display: 'inline-flex'
 };
 
-export var horizontal, vertical, horizontalReverse, verticalReverse;
+export var horizontal, vertical;
 horizontal = extend(flexRoot, {
     flexDirection: 'row'
 });
-horizontalReverse = extend(flexRoot, {
-    flexDirection: 'row-reverse'
-});
 vertical = extend(flexRoot, {
     flexDirection: 'column'
-});
-verticalReverse = extend(flexRoot, {
-    flexDirection: 'column-reverse'
 });
 
 export var wrap = {
@@ -222,8 +223,15 @@ fixedLeft = extend(fixed, {
 // A new layer  //
 //////////////////
 /**
+ * New Layer parent
+ */
+export var newLayerParent = {
+    position: 'relative',
+};
+
+/**
  *  You can have this anywhere and its like you have opened a new body
- *  This new layer will attach itself to the nearest parent with `position:relative` (or position:absolute aka newLayer)
+ *  This new layer will attach itself to the nearest parent with `position:relative` or `position:absolute` (which is what a new layer is by itself)
  */
 export var newLayer = {
     position: 'absolute',
@@ -232,3 +240,98 @@ export var newLayer = {
     top: 0,
     bottom: 0,
 };
+
+/**
+ * Box helpers
+ * Having top, left, bottom, right seperated makes it easier to override and maintain individual properties
+ */
+export namespace Box {
+    /**
+     * For `number` we assume pixels e.g. 5 => '5px'
+     * For `string` you should provide the unit e.g. '5px'
+     */
+    type BoxUnit = number | string;
+    function boxUnitToString(value: BoxUnit): string {
+        if (typeof value === 'number') {
+            return value.toString() + 'px';
+        }
+        else {
+            return value;
+        }
+    }
+
+    /**
+     * A box function is something that can take:
+     * - all
+     * - topAndBottom + leftRight
+     * - top + right + bottom + left
+     */
+    interface BoxFunction<T> {
+        (all: BoxUnit): T;
+        (topAndBottom: BoxUnit, leftAndRight: BoxUnit): T;
+        (top: BoxUnit, right: BoxUnit, bottom: BoxUnit, left: BoxUnit): T;
+    }
+
+    /**
+     * For use in simple functions
+     */
+    type Box = {
+        top: string;
+        right: string;
+        bottom: string;
+        left: string;
+    }
+
+    /**
+     * Takes a function that expects Box to be passed into it
+     * and creates a BoxFunction
+     */
+    function createBoxFunction<T>(mapFromBox: (box: Box) => T): BoxFunction<T> {
+        const result: BoxFunction<T> = (a: BoxUnit, b?: BoxUnit, c?: BoxUnit, d?: BoxUnit) => {
+            if (b === undefined && c === undefined && d === undefined) {
+                b = c = d = a;
+            }
+            else if (c === undefined && d === undefined) {
+                c = a;
+                d = b;
+            }
+
+            let box = {
+                top: boxUnitToString(a),
+                right: boxUnitToString(b),
+                bottom: boxUnitToString(c),
+                left: boxUnitToString(d)
+            };
+
+            return mapFromBox(box);
+        }
+        return result;
+    }
+
+    export const padding = createBoxFunction((box) => {
+        return {
+            paddingTop: box.top,
+            paddingRight: box.right,
+            paddingBottom: box.bottom,
+            paddingLeft: box.left
+        };
+    });
+
+    export const margin = createBoxFunction((box) => {
+        return {
+            marginTop: box.top,
+            marginRight: box.right,
+            marginBottom: box.bottom,
+            marginLeft: box.left
+        };
+    });
+
+    export const border = createBoxFunction((box) => {
+        return {
+            borderTop: box.top,
+            borderRight: box.right,
+            borderBottom: box.bottom,
+            borderLeft: box.left
+        };
+    });
+}
