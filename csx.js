@@ -36,14 +36,11 @@ exports.vertical = extend(exports.flexRoot, {
 exports.wrap = {
     flexWrap: 'wrap'
 };
-exports.wrapReverse = {
-    flexWrap: 'wrap-reverse'
-};
-exports.flexAuto = {
-    flex: '1 1 auto'
-};
 exports.flexNone = {
     flex: 'none'
+};
+exports.content = {
+    flexShrink: 0
 };
 exports.flex = {
     flex: 1

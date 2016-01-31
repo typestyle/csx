@@ -39,16 +39,17 @@ vertical = extend(flexRoot, {
 export var wrap = {
     flexWrap: 'wrap'
 };
-export var wrapReverse = {
-    flexWrap: 'wrap-reverse'
-};
-
-export var flexAuto = {
-    flex: '1 1 auto'
-};
 
 export var flexNone = {
     flex: 'none'
+};
+
+/**
+ * If you want items to be sized automatically by their children use this
+ * This is because of a bug in various flexbox implementations: http://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
+ */
+export var content = {
+    flexShrink: 0
 };
 
 export var flex = {

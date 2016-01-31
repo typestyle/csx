@@ -9,14 +9,11 @@ export declare var horizontal: any, vertical: any;
 export declare var wrap: {
     flexWrap: string;
 };
-export declare var wrapReverse: {
-    flexWrap: string;
-};
-export declare var flexAuto: {
-    flex: string;
-};
 export declare var flexNone: {
     flex: string;
+};
+export declare var content: {
+    flexShrink: number;
 };
 export declare var flex: {
     flex: number;
