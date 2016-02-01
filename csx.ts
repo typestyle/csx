@@ -24,6 +24,20 @@ export var flexRoot = {
     display: 'flex',
 };
 
+/**
+ * A general grouping component that has no impact on the parent flexbox properties e.g.
+ * <vertical>
+ *    <pass>
+ *       <content/>
+ *    </pass>
+ * </vertical>
+ */
+export var pass = {
+	display: 'inherit',
+	flexDirection: 'inherit',
+	flexGrow: 1,
+}
+
 export var inlineRoot = {
     display: 'inline-flex'
 };

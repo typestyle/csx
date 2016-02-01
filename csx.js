@@ -24,6 +24,11 @@ exports.extend = extend;
 exports.flexRoot = {
     display: 'flex',
 };
+exports.pass = {
+    display: 'inherit',
+    flexDirection: 'inherit',
+    flexGrow: 1,
+};
 exports.inlineRoot = {
     display: 'inline-flex'
 };

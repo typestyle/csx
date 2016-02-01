@@ -2,6 +2,11 @@ export declare function extend(...args: any[]): any;
 export declare var flexRoot: {
     display: string;
 };
+export declare var pass: {
+    display: string;
+    flexDirection: string;
+    flexGrow: number;
+};
 export declare var inlineRoot: {
     display: string;
 };
