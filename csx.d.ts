@@ -10,7 +10,8 @@ export declare var pass: {
 export declare var inlineRoot: {
     display: string;
 };
-export declare var horizontal: any, vertical: any;
+export declare const horizontal: any;
+export declare const vertical: any;
 export declare const horizontalReverse: any;
 export declare const verticalReverse: any;
 export declare var wrap: {
@@ -127,7 +128,10 @@ export declare var scroll: {
 export declare var fixed: {
     position: string;
 };
-export declare var fixedBottom: any, fixedLeft: any, fixedRight: any, fixedTop: any;
+export declare const fixedTop: any;
+export declare const fixedRight: any;
+export declare const fixedBottom: any;
+export declare const fixedLeft: any;
 export declare var newLayerParent: {
     position: string;
 };

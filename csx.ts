@@ -42,11 +42,10 @@ export var inlineRoot = {
     display: 'inline-flex'
 };
 
-export var horizontal, vertical;
-horizontal = extend(flexRoot, {
+export const horizontal:any = extend(flexRoot, {
     flexDirection: 'row'
 });
-vertical = extend(flexRoot, {
+export const vertical:any = extend(flexRoot, {
     flexDirection: 'column'
 });
 
@@ -227,23 +226,22 @@ export var fixed = {
     position: 'fixed'
 };
 
-export var fixedBottom, fixedLeft, fixedRight, fixedTop;
-fixedTop = extend(fixed, {
+export const fixedTop: any = extend(fixed, {
     top: 0,
     left: 0,
     right: 0,
 });
-fixedRight = extend(fixed, {
+export const fixedRight: any = extend(fixed, {
     top: 0,
     right: 0,
     bottom: 0,
 });
-fixedBottom = extend(fixed, {
+export const fixedBottom: any = extend(fixed, {
     right: 0,
     bottom: 0,
     left: 0,
 });
-fixedLeft = extend(fixed, {
+export const fixedLeft: any = extend(fixed, {
     top: 0,
     bottom: 0,
     left: 0,
