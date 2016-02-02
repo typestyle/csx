@@ -129,7 +129,6 @@ If the parent is too small the content will overflow:
 ------------------------------------
 |   OVERFLOW
 |
-------------------------------------
 ```
 
 > A *content* container determines its size based on the size of its content
