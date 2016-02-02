@@ -38,12 +38,6 @@ exports.horizontal = extend(exports.flexRoot, {
 exports.vertical = extend(exports.flexRoot, {
     flexDirection: 'column'
 });
-exports.horizontalReverse = extend(exports.flexRoot, {
-    flexDirection: 'row-reverse'
-});
-exports.verticalReverse = extend(exports.flexRoot, {
-    flexDirection: 'column-reverse'
-});
 exports.wrap = {
     flexWrap: 'wrap'
 };
