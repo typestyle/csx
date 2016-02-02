@@ -22,7 +22,7 @@ Checkout the [complete demo](https://basarat.github.io/csx/demo/).
 
 > Definitely use with [radium](https://github.com/FormidableLabs/radium) for auto browser prefixing.
 
-Also checkout [how to be effective with this layout system](https://github.com/basarat/csx/docs/)
+Also checkout [how to be effective with this layout system](https://github.com/basarat/csx/docs/README.md)
 
 ## Inspiration
 Inspired by [polymer layout.html](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).
