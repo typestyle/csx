@@ -78,7 +78,7 @@ In CSS flexbox the concept of `root` does not exist without combining it with th
 To start the layout system you would generally have something like the following:
 
 ```css
-.root {
+#root {
     /* Take up all the space from the parent */
     height:100%;
     width:100%;
@@ -109,7 +109,7 @@ So the whole page is something like:
         box-sizing: inherit;
     }
 
-    .root {
+    #root {
         /* Take up all the space from the parent */
         height: 100%;
         width: 100%;
@@ -119,7 +119,8 @@ So the whole page is something like:
 </style>
 
 <body>
-    <div class="root"></div>
+    <div id="root"></div>
+    <script src="./demo/bundle.js"></script>
 </body>
 </html>
 ```
