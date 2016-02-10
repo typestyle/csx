@@ -87,9 +87,37 @@ To start the layout system you would generally have something like the following
     display:flex;
 }
 ```
-where the page is something like:
+So the whole page is something like:
 ```html
 <html>
+<style>
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+    .root {
+        /* Take up all the space from the parent */
+        height: 100%;
+        width: 100%;
+        /* Kick start the flexible layout */
+        display: flex;
+    }
+</style>
+
 <body>
     <div class="root"></div>
 </body>
