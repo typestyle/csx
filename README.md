@@ -18,11 +18,11 @@ var Demo = React.createClass({
 }
 ```
 
-Checkout the [complete demo](https://basarat.github.io/csx/demo/).
+* Checkout the [complete demo](https://basarat.github.io/csx/demo/).
+* Also checkout [how to be effective with this layout system](https://github.com/basarat/csx/blob/gh-pages/docs/README.md)
 
-> Definitely use with [radium](https://github.com/FormidableLabs/radium) for auto browser prefixing.
 
-Also checkout [how to be effective with this layout system](https://github.com/basarat/csx/blob/gh-pages/docs/README.md)
+> PS: Definitely use something for auto browser prefixing.
 
 ## Inspiration
 Inspired by [polymer layout.html](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).
