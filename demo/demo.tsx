@@ -2,7 +2,6 @@ import * as _csx from "../csx";
 declare var React:any;
 declare var csx:typeof _csx;
 
-var extend = csx.extend;
 var tall = {height:'150px'};
 var tallVertical = extend(csx.vertical,{height:'250px'});
 var tallHorizontal = extend(csx.horizontal,tall);
@@ -13,7 +12,7 @@ var content =
   <h1>Pure layout. Nothing more. Nothing less.</h1>
   <div><a href="https://github.com/basarat/csx/blob/gh-pages/demo/demo.tsx">Source</a></div>
       
-  <h2>Entice<a class="permalink" title="Permalink" href="#entice">#</a></h2>  
+  <h2>Entice<a className="permalink" title="Permalink" href="#entice">#</a></h2>  
   <p>
       Use the <code>centerCenter</code> style to center Center
   </p>
@@ -22,7 +21,7 @@ var content =
   </div>
   
   
-  <h2 id="horizontal-and-vertical-layout">Horizontal and vertical layout<a class="permalink" title="Permalink" href="#horizontal-and-vertical-layout">#</a></h2>
+  <h2 id="horizontal-and-vertical-layout">Horizontal and vertical layout<a className="permalink" title="Permalink" href="#horizontal-and-vertical-layout">#</a></h2>
   <p>
       When a container includes the <code>horizontal</code> or <code>vertical</code> style, it can become a flex container with the specified orientation
   </p>            
@@ -32,7 +31,7 @@ var content =
       <div>Three</div>
   </div>
   
-  <h3 id="flexible-children" class="has-permalink">Flexible children<a class="permalink" title="Permalink" href="#flexible-children">#</a></h3>
+  <h3 id="flexible-children" class="has-permalink">Flexible children<a className="permalink" title="Permalink" href="#flexible-children">#</a></h3>
   <p>Children of an element using the <code>layout</code> styles can use <code>flex</code> style to control their own sizing. For example:</p>
   <div className="demo" style={csx.horizontal}>
     <div>Alpha</div>
@@ -56,17 +55,17 @@ var content =
     <div style={csx.flex2}>Gamma</div>
   </div>
   
-  <h3 id="cross-axis-alignment" class="has-permalink">Cross-axis alignment<a class="permalink" title="Permalink" href="#cross-axis-alignment">#</a></h3>
+  <h3 id="cross-axis-alignment" className="has-permalink">Cross-axis alignment<a class="permalink" title="Permalink" href="#cross-axis-alignment">#</a></h3>
   <p>By default, children stretch to fit the cross-axis (e.g. <em>vertical</em> stretching in a <em>horizontal</em> layout).</p>
   <div className="demo" style={tallHorizontal}>
     <div>Stretch Fill</div>
   </div>
   
   <p>Position <em>across</em> the main axis (e.g. <em>vertically</em> in a <em>horizontal</em> layout) by adding <code>center</code> or <code>start</code> or <code>end</code>.</p>
-  <div className="demo" style={csx.extend(tallHorizontal,csx.center)}>
+  <div className="demo" style={style(tallHorizontal,csx.center)}>
     <div>Center</div>
   </div>
-  <div className="demo" style={csx.extend(tallHorizontal,csx.start)}>
+  <div className="demo" style={style(tallHorizontal,csx.start)}>
     <div>start</div>
   </div>
   <div className="demo" style={csx.extend(tallHorizontal,csx.end)}>
@@ -101,7 +100,7 @@ var content =
     <div>between-justified</div>
   </div>
   
-  <h2 id="self-alignment" class="has-permalink">Self alignment<a class="permalink" title="Permalink" href="#self-alignment">#</a></h2>
+  <h2 id="self-alignment" className="has-permalink">Self alignment<a className="permalink" title="Permalink" href="#self-alignment">#</a></h2>
   Alignment can also be set per-child (instead of using the layout containers rules):
   <div className="demo" style={tallHorizontal}>
     <div style={csx.selfStart}>selfStart</div>

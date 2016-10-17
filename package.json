@@ -1,15 +1,18 @@
 {
   "name": "csx",
   "version": "4.0.0",
-  "description": "CSS + JSX Starter",
+  "description": "Utility styles for TypeStyle",
   "main": "csx.js",
   "typings": "csx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p .",
+    "test": "npm run build",
+    "preversion": "npm run build",
+    "postversion": "git push --follow-tags && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/basarat/csx.git"
+    "url": "git+https://github.com/typestyle/csx.git"
   },
   "keywords": [
     "TypeScript",
@@ -20,10 +23,16 @@
   "author": "basaratali@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/basarat/csx/issues"
+    "url": "https://github.com/typestyle/csx/issues"
   },
-  "homepage": "https://github.com/basarat/csx#readme",
+  "homepage": "https://github.com/typestyle/csx#readme",
   "devDependencies": {
-    "radium": "^0.13.7"
+    "@types/react": "^0.14.41",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "typestyle": "latest"
+  },
+  "peerDependency": {
+    "typestyle": "*"
   }
 }

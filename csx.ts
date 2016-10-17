@@ -1,27 +1,19 @@
-// Other vendor prefix support can be provided by external projects like : autoprefixer embedded into "radium"
-// https://github.com/Polymer/layout/blob/master/layout.html
+/**
+ * @module Provides useful `style` primitives
+ * 
+ * * -webkit- is needed for mobile safari (iPad)
+ */
 
-export function extend(...args: any[]): any {
-	// Defend against user error
-	for (let obj of args) {
-        if (obj instanceof Array) {
-            throw new Error(`User error: use extend(a,b) instead of extend([a,b]). Object: ${obj}`)
-        }
-    }
+import {style} from 'typestyle';
 
-    var newObj = {};
-    for (let obj of args) {
-        for (let key in obj) {
-            //copy all the fields
-            newObj[key] = obj[key];
-        }
-    }
-    return newObj;
-};
-
-/** If you have more than one child prefer horizontal,vertical */
+/** 
+ * If you have more than one child prefer horizontal,vertical
+ */
 export var flexRoot = {
-    display: 'flex',
+  display: [
+    '-webkit-flex',
+    'flex'
+  ]
 };
 
 /**
@@ -33,28 +25,32 @@ export var flexRoot = {
  * </vertical>
  */
 export var pass = {
-	display: 'inherit',
-	flexDirection: 'inherit',
-	flexGrow: 1,
+  display: 'inherit',
+
+  '-webkit-flex-direction': 'inherit',
+  flexDirection: 'inherit',
+
+  '-webkit-flex-grow': 1,
+  flexGrow: 1,
 }
 
 export var inlineRoot = {
-    display: 'inline-flex'
+  display: 'inline-flex'
 };
 
-export const horizontal:any = extend(flexRoot, {
-    flexDirection: 'row'
+export const horizontal: any = extend(flexRoot, {
+  flexDirection: 'row'
 });
-export const vertical:any = extend(flexRoot, {
-    flexDirection: 'column'
+export const vertical: any = extend(flexRoot, {
+  flexDirection: 'column'
 });
 
 export var wrap = {
-    flexWrap: 'wrap'
+  flexWrap: 'wrap'
 };
 
 export var flexNone = {
-    flex: 'none'
+  flex: 'none'
 };
 
 /**
@@ -62,46 +58,59 @@ export var flexNone = {
  * This is because of a bug in various flexbox implementations: http://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
  */
 export var content = {
-    flexShrink: 0
+  '-webkit-flex-shrink': 0,
+  flexShrink: 0
 };
 
 export var flex = {
-    flex: 1
+  '-webkit-flex': 1,
+  flex: 1
 };
 
 export var flex1 = flex;
 export var flex2 = {
-    flex: 2
+  '-webkit-flex': 2,
+  flex: 2
 };
 export var flex3 = {
-    flex: 3
+  '-webkit-flex': 3,
+  flex: 3
 };
 export var flex4 = {
-    flex: 4
+  '-webkit-flex': 4,
+  flex: 4
 };
 export var flex5 = {
-    flex: 5
+  '-webkit-flex': 5,
+  flex: 5
 };
 export var flex6 = {
-    flex: 6
+  '-webkit-flex': 6,
+  flex: 6
 };
 export var flex7 = {
-    flex: 7
+  '-webkit-flex': 7,
+  flex: 7
 };
 export var flex8 = {
-    flex: 8
+  '-webkit-flex': 8,
+  flex: 8
 };
 export var flex9 = {
-    flex: 9
+  '-webkit-flex': 9,
+  flex: 9
 };
 export var flex10 = {
-    flex: 10
+  '-webkit-flex': 10,
+  flex: 10
 };
 export var flex11 = {
-    flex: 11
+  '-webkit-flex': 11,
+  flex: 11
 };
 export var flex12 = {
-    flex: 12
+  '-webkit-flex': 12,
+  flex: 12
 };
 
 /////////////////////////////
@@ -109,13 +118,16 @@ export var flex12 = {
 /////////////////////////////
 
 export var start = {
-    alignItems: 'flex-start'
+  '-webkit-align-items': 'flex-start',
+  alignItems: 'flex-start'
 };
 export var center = {
-    alignItems: 'center'
+  '-webkit-align-items': 'center',
+  alignItems: 'center'
 };
 export var end = {
-    alignItems: 'flex-end'
+  '-webkit-align-items': 'flex-end',
+  alignItems: 'flex-end'
 };
 
 ////////////////////////////
@@ -123,19 +135,24 @@ export var end = {
 ////////////////////////////
 
 export var startJustified = {
-    justifyContent: 'flex-start'
+  '-webkit-justify-content': 'flex-start',
+  justifyContent: 'flex-start'
 };
 export var centerJustified = {
-    justifyContent: 'center'
+  '-webkit-justify-content': 'center',
+  justifyContent: 'center'
 };
 export var endJustified = {
-    justifyContent: 'flex-end'
+  '-webkit-justify-content': 'flex-end',
+  justifyContent: 'flex-end'
 };
 export var aroundJustified = {
-    justifyContent: 'space-around'
+  '-webkit-justify-content': 'space-around',
+  justifyContent: 'space-around'
 };
 export var betweenJustified = {
-    justifyContent: 'space-between'
+  '-webkit-justify-content': 'space-between',
+  justifyContent: 'space-between'
 };
 
 ////////////////////////////
@@ -149,16 +166,20 @@ export var centerCenter = extend(flexRoot, center, centerJustified);
 ////////////////////
 
 export var selfStart = {
-    alignSelf: 'flex-start'
+  '-webkit-align-self': 'flex-start',
+  alignSelf: 'flex-start'
 };
 export var selfCenter = {
-    alignSelf: 'center'
+  '-webkit-align-self': 'center',
+  alignSelf: 'center'
 };
 export var selfEnd = {
-    alignSelf: 'flex-end'
+  '-webkit-align-self': 'flex-end',
+  alignSelf: 'flex-end'
 };
 export var selfStretch = {
-    alignSelf: 'stretch'
+  '-webkit-align-self': 'stretch',
+  alignSelf: 'stretch'
 };
 
 //////////////////
@@ -166,37 +187,15 @@ export var selfStretch = {
 //////////////////
 
 export var block = {
-    display: 'block'
+  display: 'block'
 };
 
-export var hidden = {
-    display: 'none'
+export var none = {
+  display: 'none'
 };
 
 export var invisible = {
-    visibility: 'hidden'
-};
-
-export var relative = {
-    position: 'relative'
-};
-
-export var fit = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-};
-
-export var fullBleedBody = {
-    margin: 0,
-    height: '100vh'
-};
-
-export var scroll = {
-    // 'webkitOverflowScrolling': 'touch',
-    overflow: 'auto'
+  visibility: 'hidden'
 };
 
 ////////////////////
@@ -208,28 +207,28 @@ export var scroll = {
  * Instead use fixedBottom,fixedLeft,fixedRight,fixedTop
  */
 export var fixed = {
-    position: 'fixed'
+  position: 'fixed'
 };
 
 export const fixedTop: any = extend(fixed, {
-    top: 0,
-    left: 0,
-    right: 0,
+  top: 0,
+  left: 0,
+  right: 0,
 });
 export const fixedRight: any = extend(fixed, {
-    top: 0,
-    right: 0,
-    bottom: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
 });
 export const fixedBottom: any = extend(fixed, {
-    right: 0,
-    bottom: 0,
-    left: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
 });
 export const fixedLeft: any = extend(fixed, {
-    top: 0,
-    bottom: 0,
-    left: 0,
+  top: 0,
+  bottom: 0,
+  left: 0,
 });
 
 //////////////////
@@ -239,7 +238,7 @@ export const fixedLeft: any = extend(fixed, {
  * New Layer parent
  */
 export var newLayerParent = {
-    position: 'relative',
+  position: 'relative',
 };
 
 /**
@@ -247,104 +246,113 @@ export var newLayerParent = {
  *  This new layer will attach itself to the nearest parent with `position:relative` or `position:absolute` (which is what a new layer is by itself)
  */
 export var newLayer = {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
 };
+
+/**
+ * Smooth scrolling
+ */
+export const scroll = {
+  '-webkit-overflow-scrolling': 'touch',
+  overflow: 'auto'
+}
 
 /**
  * Box helpers
  * Having top, left, bottom, right seperated makes it easier to override and maintain individual properties
  */
 export namespace Box {
-    /**
-     * For `number` we assume pixels e.g. 5 => '5px'
-     * For `string` you should provide the unit e.g. '5px'
-     */
-    export type BoxUnit = number | string;
-    function boxUnitToString(value: BoxUnit): string {
-        if (typeof value === 'number') {
-            return value.toString() + 'px';
-        }
-        else {
-            return value;
-        }
+  /**
+   * For `number` we assume pixels e.g. 5 => '5px'
+   * For `string` *you* should provide the unit e.g. '5px'
+   */
+  export type BoxUnit = number | string;
+  function boxUnitToString(value: BoxUnit): string {
+    if (typeof value === 'number') {
+      return value.toString() + 'px';
     }
-
-    /**
-     * A box function is something that can take:
-     * - all
-     * - topAndBottom + leftRight
-     * - top + right + bottom + left
-     */
-    export interface BoxFunction<T> {
-        (all: BoxUnit): T;
-        (topAndBottom: BoxUnit, leftAndRight: BoxUnit): T;
-        (top: BoxUnit, right: BoxUnit, bottom: BoxUnit, left: BoxUnit): T;
+    else {
+      return value;
     }
+  }
 
-    /**
-     * For use in simple functions
-     */
-    type Box = {
-        top: string;
-        right: string;
-        bottom: string;
-        left: string;
+  /**
+   * A box function is something that can take:
+   * - all
+   * - topAndBottom + leftRight
+   * - top + right + bottom + left
+   */
+  export interface BoxFunction<T> {
+    (all: BoxUnit): T;
+    (topAndBottom: BoxUnit, leftAndRight: BoxUnit): T;
+    (top: BoxUnit, right: BoxUnit, bottom: BoxUnit, left: BoxUnit): T;
+  }
+
+  /**
+   * For use in simple functions
+   */
+  type Box = {
+    top: string;
+    right: string;
+    bottom: string;
+    left: string;
+  }
+
+  /**
+   * Takes a function that expects Box to be passed into it
+   * and creates a BoxFunction
+   */
+  function createBoxFunction<T>(mapFromBox: (box: Box) => T): BoxFunction<T> {
+    const result: BoxFunction<T> = (a: BoxUnit, b?: BoxUnit, c?: BoxUnit, d?: BoxUnit) => {
+      if (b === undefined && c === undefined && d === undefined) {
+        b = c = d = a;
+      }
+      else if (c === undefined && d === undefined) {
+        c = a;
+        d = b;
+      }
+
+      let box = {
+        top: boxUnitToString(a),
+        right: boxUnitToString(b),
+        bottom: boxUnitToString(c),
+        left: boxUnitToString(d)
+      };
+
+      return mapFromBox(box);
     }
+    return result;
+  }
 
-    /**
-     * Takes a function that expects Box to be passed into it
-     * and creates a BoxFunction
-     */
-    function createBoxFunction<T>(mapFromBox: (box: Box) => T): BoxFunction<T> {
-        const result: BoxFunction<T> = (a: BoxUnit, b?: BoxUnit, c?: BoxUnit, d?: BoxUnit) => {
-            if (b === undefined && c === undefined && d === undefined) {
-                b = c = d = a;
-            }
-            else if (c === undefined && d === undefined) {
-                c = a;
-                d = b;
-            }
+  export const padding = createBoxFunction((box) => {
+    return {
+      paddingTop: box.top,
+      paddingRight: box.right,
+      paddingBottom: box.bottom,
+      paddingLeft: box.left
+    };
+  });
 
-            let box = {
-                top: boxUnitToString(a),
-                right: boxUnitToString(b),
-                bottom: boxUnitToString(c),
-                left: boxUnitToString(d)
-            };
+  export const margin = createBoxFunction((box) => {
+    return {
+      marginTop: box.top,
+      marginRight: box.right,
+      marginBottom: box.bottom,
+      marginLeft: box.left
+    };
+  });
 
-            return mapFromBox(box);
-        }
-        return result;
-    }
-
-    export const padding = createBoxFunction((box) => {
-        return {
-            paddingTop: box.top,
-            paddingRight: box.right,
-            paddingBottom: box.bottom,
-            paddingLeft: box.left
-        };
-    });
-
-    export const margin = createBoxFunction((box) => {
-        return {
-            marginTop: box.top,
-            marginRight: box.right,
-            marginBottom: box.bottom,
-            marginLeft: box.left
-        };
-    });
-
-    export const border = createBoxFunction((box) => {
-        return {
-            borderTop: box.top,
-            borderRight: box.right,
-            borderBottom: box.bottom,
-            borderLeft: box.left
-        };
-    });
+  export const border = createBoxFunction((box) => {
+    return {
+      borderTop: box.top,
+      borderRight: box.right,
+      borderBottom: box.bottom,
+      borderLeft: box.left
+    };
+  });
 }
+
