@@ -13,5 +13,6 @@
     "files": [
         "./csx.ts",
         "./demo/demo.tsx"
-    ]
+    ],
+    "compileOnSave": false
 }

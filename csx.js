@@ -1,4 +1,5 @@
 "use strict";
+var typestyle_1 = require("typestyle");
 exports.flexRoot = {
     display: [
         '-webkit-flex',
@@ -15,13 +16,16 @@ exports.pass = {
 exports.inlineRoot = {
     display: 'inline-flex'
 };
-exports.horizontal = extend(exports.flexRoot, {
+exports.horizontal = typestyle_1.extend(exports.flexRoot, {
+    '-webkit-flex-direction': 'row',
     flexDirection: 'row'
 });
-exports.vertical = extend(exports.flexRoot, {
+exports.vertical = typestyle_1.extend(exports.flexRoot, {
+    '-webkit-flex-direction': 'column',
     flexDirection: 'column'
 });
 exports.wrap = {
+    '-webkit-flex-wrap': 'wrap',
     flexWrap: 'wrap'
 };
 exports.flexNone = {
@@ -112,7 +116,7 @@ exports.betweenJustified = {
     '-webkit-justify-content': 'space-between',
     justifyContent: 'space-between'
 };
-exports.centerCenter = extend(exports.flexRoot, exports.center, exports.centerJustified);
+exports.centerCenter = typestyle_1.extend(exports.flexRoot, exports.center, exports.centerJustified);
 exports.selfStart = {
     '-webkit-align-self': 'flex-start',
     alignSelf: 'flex-start'
@@ -141,22 +145,22 @@ exports.invisible = {
 exports.fixed = {
     position: 'fixed'
 };
-exports.fixedTop = extend(exports.fixed, {
+exports.fixedTop = typestyle_1.extend(exports.fixed, {
     top: 0,
     left: 0,
     right: 0,
 });
-exports.fixedRight = extend(exports.fixed, {
+exports.fixedRight = typestyle_1.extend(exports.fixed, {
     top: 0,
     right: 0,
     bottom: 0,
 });
-exports.fixedBottom = extend(exports.fixed, {
+exports.fixedBottom = typestyle_1.extend(exports.fixed, {
     right: 0,
     bottom: 0,
     left: 0,
 });
-exports.fixedLeft = extend(exports.fixed, {
+exports.fixedLeft = typestyle_1.extend(exports.fixed, {
     top: 0,
     bottom: 0,
     left: 0,

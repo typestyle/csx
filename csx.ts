@@ -4,12 +4,12 @@
  * * -webkit- is needed for mobile safari (iPad)
  */
 
-import {style} from 'typestyle';
+import { style, extend } from 'typestyle';
 
 /** 
  * If you have more than one child prefer horizontal,vertical
  */
-export var flexRoot = {
+export var flexRoot: NestedCSSProperties = {
   display: [
     '-webkit-flex',
     'flex'
@@ -24,7 +24,7 @@ export var flexRoot = {
  *    </pass>
  * </vertical>
  */
-export var pass = {
+export var pass: NestedCSSProperties = {
   display: 'inherit',
 
   '-webkit-flex-direction': 'inherit',
@@ -34,22 +34,25 @@ export var pass = {
   flexGrow: 1,
 }
 
-export var inlineRoot = {
+export var inlineRoot: NestedCSSProperties = {
   display: 'inline-flex'
 };
 
-export const horizontal: any = extend(flexRoot, {
+export const horizontal: NestedCSSProperties = extend(flexRoot, {
+  '-webkit-flex-direction': 'row',
   flexDirection: 'row'
 });
-export const vertical: any = extend(flexRoot, {
+export const vertical: NestedCSSProperties = extend(flexRoot, {
+  '-webkit-flex-direction': 'column',
   flexDirection: 'column'
 });
 
-export var wrap = {
+export var wrap: NestedCSSProperties = {
+  '-webkit-flex-wrap': 'wrap',
   flexWrap: 'wrap'
 };
 
-export var flexNone = {
+export var flexNone: NestedCSSProperties = {
   flex: 'none'
 };
 
@@ -57,58 +60,58 @@ export var flexNone = {
  * If you want items to be sized automatically by their children use this
  * This is because of a bug in various flexbox implementations: http://philipwalton.com/articles/normalizing-cross-browser-flexbox-bugs/
  */
-export var content = {
+export var content: NestedCSSProperties = {
   '-webkit-flex-shrink': 0,
   flexShrink: 0
 };
 
-export var flex = {
+export var flex: NestedCSSProperties = {
   '-webkit-flex': 1,
   flex: 1
 };
 
-export var flex1 = flex;
-export var flex2 = {
+export var flex1: NestedCSSProperties = flex;
+export var flex2: NestedCSSProperties = {
   '-webkit-flex': 2,
   flex: 2
 };
-export var flex3 = {
+export var flex3: NestedCSSProperties = {
   '-webkit-flex': 3,
   flex: 3
 };
-export var flex4 = {
+export var flex4: NestedCSSProperties = {
   '-webkit-flex': 4,
   flex: 4
 };
-export var flex5 = {
+export var flex5: NestedCSSProperties = {
   '-webkit-flex': 5,
   flex: 5
 };
-export var flex6 = {
+export var flex6: NestedCSSProperties = {
   '-webkit-flex': 6,
   flex: 6
 };
-export var flex7 = {
+export var flex7: NestedCSSProperties = {
   '-webkit-flex': 7,
   flex: 7
 };
-export var flex8 = {
+export var flex8: NestedCSSProperties = {
   '-webkit-flex': 8,
   flex: 8
 };
-export var flex9 = {
+export var flex9: NestedCSSProperties = {
   '-webkit-flex': 9,
   flex: 9
 };
-export var flex10 = {
+export var flex10: NestedCSSProperties = {
   '-webkit-flex': 10,
   flex: 10
 };
-export var flex11 = {
+export var flex11: NestedCSSProperties = {
   '-webkit-flex': 11,
   flex: 11
 };
-export var flex12 = {
+export var flex12: NestedCSSProperties = {
   '-webkit-flex': 12,
   flex: 12
 };
@@ -117,15 +120,15 @@ export var flex12 = {
 // Alignment in cross axis //
 /////////////////////////////
 
-export var start = {
+export var start: NestedCSSProperties = {
   '-webkit-align-items': 'flex-start',
   alignItems: 'flex-start'
 };
-export var center = {
+export var center: NestedCSSProperties = {
   '-webkit-align-items': 'center',
   alignItems: 'center'
 };
-export var end = {
+export var end: NestedCSSProperties = {
   '-webkit-align-items': 'flex-end',
   alignItems: 'flex-end'
 };
@@ -134,23 +137,23 @@ export var end = {
 // Alignment in main axis //
 ////////////////////////////
 
-export var startJustified = {
+export var startJustified: NestedCSSProperties = {
   '-webkit-justify-content': 'flex-start',
   justifyContent: 'flex-start'
 };
-export var centerJustified = {
+export var centerJustified: NestedCSSProperties = {
   '-webkit-justify-content': 'center',
   justifyContent: 'center'
 };
-export var endJustified = {
+export var endJustified: NestedCSSProperties = {
   '-webkit-justify-content': 'flex-end',
   justifyContent: 'flex-end'
 };
-export var aroundJustified = {
+export var aroundJustified: NestedCSSProperties = {
   '-webkit-justify-content': 'space-around',
   justifyContent: 'space-around'
 };
-export var betweenJustified = {
+export var betweenJustified: NestedCSSProperties = {
   '-webkit-justify-content': 'space-between',
   justifyContent: 'space-between'
 };
@@ -159,25 +162,25 @@ export var betweenJustified = {
 // Alignment in both axes //
 ////////////////////////////
 
-export var centerCenter = extend(flexRoot, center, centerJustified);
+export var centerCenter: NestedCSSProperties = extend(flexRoot, center, centerJustified);
 
 ////////////////////
 // Self alignment //
 ////////////////////
 
-export var selfStart = {
+export var selfStart: NestedCSSProperties = {
   '-webkit-align-self': 'flex-start',
   alignSelf: 'flex-start'
 };
-export var selfCenter = {
+export var selfCenter: NestedCSSProperties = {
   '-webkit-align-self': 'center',
   alignSelf: 'center'
 };
-export var selfEnd = {
+export var selfEnd: NestedCSSProperties = {
   '-webkit-align-self': 'flex-end',
   alignSelf: 'flex-end'
 };
-export var selfStretch = {
+export var selfStretch: NestedCSSProperties = {
   '-webkit-align-self': 'stretch',
   alignSelf: 'stretch'
 };
@@ -186,15 +189,15 @@ export var selfStretch = {
 // Other layout //
 //////////////////
 
-export var block = {
+export var block: NestedCSSProperties = {
   display: 'block'
 };
 
-export var none = {
+export var none: NestedCSSProperties = {
   display: 'none'
 };
 
-export var invisible = {
+export var invisible: NestedCSSProperties = {
   visibility: 'hidden'
 };
 
@@ -206,26 +209,26 @@ export var invisible = {
  * You don't generally need to use this.
  * Instead use fixedBottom,fixedLeft,fixedRight,fixedTop
  */
-export var fixed = {
+export var fixed: NestedCSSProperties = {
   position: 'fixed'
 };
 
-export const fixedTop: any = extend(fixed, {
+export const fixedTop: NestedCSSProperties = extend(fixed, {
   top: 0,
   left: 0,
   right: 0,
 });
-export const fixedRight: any = extend(fixed, {
+export const fixedRight: NestedCSSProperties = extend(fixed, {
   top: 0,
   right: 0,
   bottom: 0,
 });
-export const fixedBottom: any = extend(fixed, {
+export const fixedBottom: NestedCSSProperties = extend(fixed, {
   right: 0,
   bottom: 0,
   left: 0,
 });
-export const fixedLeft: any = extend(fixed, {
+export const fixedLeft: NestedCSSProperties = extend(fixed, {
   top: 0,
   bottom: 0,
   left: 0,
@@ -237,7 +240,7 @@ export const fixedLeft: any = extend(fixed, {
 /**
  * New Layer parent
  */
-export var newLayerParent = {
+export var newLayerParent: NestedCSSProperties = {
   position: 'relative',
 };
 
@@ -245,7 +248,7 @@ export var newLayerParent = {
  *  You can have this anywhere and its like you have opened a new body
  *  This new layer will attach itself to the nearest parent with `position:relative` or `position:absolute` (which is what a new layer is by itself)
  */
-export var newLayer = {
+export var newLayer: NestedCSSProperties = {
   position: 'absolute',
   left: 0,
   right: 0,
@@ -256,7 +259,7 @@ export var newLayer = {
 /**
  * Smooth scrolling
  */
-export const scroll = {
+export const scroll: NestedCSSProperties = {
   '-webkit-overflow-scrolling': 'touch',
   overflow: 'auto'
 }
