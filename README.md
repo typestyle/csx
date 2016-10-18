@@ -20,7 +20,6 @@ var Demo = () =>
     <div>Two</div>
     <div>Three</div>
   </div>;
-}
 ```
 
 Ofcourse you can compose styles easily: 
@@ -42,7 +41,6 @@ const Demo = () =>
     <div>Two</div>
     <div>Three</div>
   </div>;
-}
 ```
 
 * Checkout the [complete demo](https://typestyle.github.io/csx/demo/).
