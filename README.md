@@ -5,13 +5,38 @@ An abstraction over CSS properties with semantic names for enhanced readability 
 
 ## Usage
 
+Just pass the objects exposed from `csx` to `typestyle.style` to get a class name e.g.
+
 ```js
 import * as csx from 'csx';
 import {style} from 'typestyle';
 
+const horizontal = style(csx.horizontal);
+
+/** Sample usage with React */
 var Demo = React.createClass({
     render: function() {
-        return <div className={style(csx.horizontal)}>
+        return <div className={horizontal}>
+                    <div>One</div>
+                    <div>Two</div>
+                    <div>Three</div>
+               </div>;
+}
+```
+
+Ofcourse you can compose styles easily: 
+
+```js
+import * as csx from 'csx';
+import {style} from 'typestyle';
+
+const flexHorizontal = style(
+  csx.flex,csx.horizontal);
+
+/** Sample usage with React */
+var Demo = React.createClass({
+    render: function() {
+        return <div className={flexHorizontal}>
                     <div>One</div>
                     <div>Two</div>
                     <div>Three</div>
