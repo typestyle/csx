@@ -8,7 +8,7 @@
     "build:demo": "webpack --config ./webpack.config.js",
     "build:src": "tsc -p .",
     "build": "npm run build:demo && npm run build:src",
-    "start": "tsc -w -p . & webpack-dev-server --hot --inline --no-info --content-base ./demo --config webpack.config.js",
+    "start": "tsc -w -p . & webpack-dev-server --host 0.0.0.0 --hot --inline --no-info --content-base ./demo --config webpack.config.js",
     "prepush": "npm run build",
     "test": "npm run build",
     "preversion": "npm run build",
