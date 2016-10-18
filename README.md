@@ -14,13 +14,12 @@ import {style} from 'typestyle';
 const horizontal = style(csx.horizontal);
 
 /** Sample usage with React */
-var Demo = React.createClass({
-    render: function() {
-        return <div className={horizontal}>
-                    <div>One</div>
-                    <div>Two</div>
-                    <div>Three</div>
-               </div>;
+var Demo = () => 
+  <div className={horizontal}>
+    <div>One</div>
+    <div>Two</div>
+    <div>Three</div>
+  </div>;
 }
 ```
 
@@ -30,17 +29,19 @@ Ofcourse you can compose styles easily:
 import * as csx from 'csx';
 import {style} from 'typestyle';
 
-const flexHorizontal = style(
-  csx.flex,csx.horizontal);
+const flexHorizontalGreen = style(
+  csx.flex,
+  csx.horizontal,
+  { backgroundColor: 'green' }
+);
 
 /** Sample usage with React */
-var Demo = React.createClass({
-    render: function() {
-        return <div className={flexHorizontal}>
-                    <div>One</div>
-                    <div>Two</div>
-                    <div>Three</div>
-               </div>;
+const Demo = () => 
+  <div className={flexHorizontalGreen}>
+    <div>One</div>
+    <div>Two</div>
+    <div>Three</div>
+  </div>;
 }
 ```
 
