@@ -1,16 +1,17 @@
 [![npm version](https://badge.fury.io/js/csx.svg)](http://badge.fury.io/js/csx)
 
 # CSX
-An abstraction over flexbox with semantic names for enhanced readability and maintainability. Done using the CSSinJS pattern.
+An abstraction over CSS properties with semantic names for enhanced readability and maintainability. Designed to be used with TypeStyle
 
 ## Usage
 
 ```js
-var csx = require('csx');
+import * as csx from 'csx';
+import {style} from 'typestyle';
 
 var Demo = React.createClass({
     render: function() {
-        return <div className="demo" style={csx.horizontal}>
+        return <div className={style(csx.horizontal)}>
                     <div>One</div>
                     <div>Two</div>
                     <div>Three</div>
@@ -18,11 +19,5 @@ var Demo = React.createClass({
 }
 ```
 
-* Checkout the [complete demo](https://basarat.github.io/csx/demo/).
+* Checkout the [complete demo](https://typestyle.github.io/csx/demo/).
 * Also checkout [how to be effective with this layout system](https://github.com/basarat/csx/blob/gh-pages/docs/README.md)
-
-
-> PS: Definitely use something for auto browser prefixing.
-
-## Inspiration
-Inspired by [polymer layout.html](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).

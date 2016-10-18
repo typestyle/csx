@@ -1,171 +1,166 @@
 "use strict";
-function extend() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i - 0] = arguments[_i];
-    }
-    for (var _a = 0, args_1 = args; _a < args_1.length; _a++) {
-        var obj = args_1[_a];
-        if (obj instanceof Array) {
-            throw new Error("User error: use extend(a,b) instead of extend([a,b]). Object: " + obj);
-        }
-    }
-    var newObj = {};
-    for (var _b = 0, args_2 = args; _b < args_2.length; _b++) {
-        var obj = args_2[_b];
-        for (var key in obj) {
-            newObj[key] = obj[key];
-        }
-    }
-    return newObj;
-}
-exports.extend = extend;
-;
+var typestyle_1 = require("typestyle");
 exports.flexRoot = {
-    display: 'flex',
+    display: [
+        '-webkit-flex',
+        'flex'
+    ]
 };
 exports.pass = {
     display: 'inherit',
+    '-webkit-flex-direction': 'inherit',
     flexDirection: 'inherit',
+    '-webkit-flex-grow': 1,
     flexGrow: 1,
 };
 exports.inlineRoot = {
     display: 'inline-flex'
 };
-exports.horizontal = extend(exports.flexRoot, {
+exports.horizontal = typestyle_1.extend(exports.flexRoot, {
+    '-webkit-flex-direction': 'row',
     flexDirection: 'row'
 });
-exports.vertical = extend(exports.flexRoot, {
+exports.vertical = typestyle_1.extend(exports.flexRoot, {
+    '-webkit-flex-direction': 'column',
     flexDirection: 'column'
 });
 exports.wrap = {
+    '-webkit-flex-wrap': 'wrap',
     flexWrap: 'wrap'
 };
 exports.flexNone = {
     flex: 'none'
 };
 exports.content = {
+    '-webkit-flex-shrink': 0,
     flexShrink: 0
 };
 exports.flex = {
+    '-webkit-flex': 1,
     flex: 1
 };
 exports.flex1 = exports.flex;
 exports.flex2 = {
+    '-webkit-flex': 2,
     flex: 2
 };
 exports.flex3 = {
+    '-webkit-flex': 3,
     flex: 3
 };
 exports.flex4 = {
+    '-webkit-flex': 4,
     flex: 4
 };
 exports.flex5 = {
+    '-webkit-flex': 5,
     flex: 5
 };
 exports.flex6 = {
+    '-webkit-flex': 6,
     flex: 6
 };
 exports.flex7 = {
+    '-webkit-flex': 7,
     flex: 7
 };
 exports.flex8 = {
+    '-webkit-flex': 8,
     flex: 8
 };
 exports.flex9 = {
+    '-webkit-flex': 9,
     flex: 9
 };
 exports.flex10 = {
+    '-webkit-flex': 10,
     flex: 10
 };
 exports.flex11 = {
+    '-webkit-flex': 11,
     flex: 11
 };
 exports.flex12 = {
+    '-webkit-flex': 12,
     flex: 12
 };
 exports.start = {
+    '-webkit-align-items': 'flex-start',
     alignItems: 'flex-start'
 };
 exports.center = {
+    '-webkit-align-items': 'center',
     alignItems: 'center'
 };
 exports.end = {
+    '-webkit-align-items': 'flex-end',
     alignItems: 'flex-end'
 };
 exports.startJustified = {
+    '-webkit-justify-content': 'flex-start',
     justifyContent: 'flex-start'
 };
 exports.centerJustified = {
+    '-webkit-justify-content': 'center',
     justifyContent: 'center'
 };
 exports.endJustified = {
+    '-webkit-justify-content': 'flex-end',
     justifyContent: 'flex-end'
 };
 exports.aroundJustified = {
+    '-webkit-justify-content': 'space-around',
     justifyContent: 'space-around'
 };
 exports.betweenJustified = {
+    '-webkit-justify-content': 'space-between',
     justifyContent: 'space-between'
 };
-exports.centerCenter = extend(exports.flexRoot, exports.center, exports.centerJustified);
+exports.centerCenter = typestyle_1.extend(exports.flexRoot, exports.center, exports.centerJustified);
 exports.selfStart = {
+    '-webkit-align-self': 'flex-start',
     alignSelf: 'flex-start'
 };
 exports.selfCenter = {
+    '-webkit-align-self': 'center',
     alignSelf: 'center'
 };
 exports.selfEnd = {
+    '-webkit-align-self': 'flex-end',
     alignSelf: 'flex-end'
 };
 exports.selfStretch = {
+    '-webkit-align-self': 'stretch',
     alignSelf: 'stretch'
 };
 exports.block = {
     display: 'block'
 };
-exports.hidden = {
+exports.none = {
     display: 'none'
 };
 exports.invisible = {
     visibility: 'hidden'
 };
-exports.relative = {
-    position: 'relative'
-};
-exports.fit = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-};
-exports.fullBleedBody = {
-    margin: 0,
-    height: '100vh'
-};
-exports.scroll = {
-    overflow: 'auto'
-};
 exports.fixed = {
     position: 'fixed'
 };
-exports.fixedTop = extend(exports.fixed, {
+exports.fixedTop = typestyle_1.extend(exports.fixed, {
     top: 0,
     left: 0,
     right: 0,
 });
-exports.fixedRight = extend(exports.fixed, {
+exports.fixedRight = typestyle_1.extend(exports.fixed, {
     top: 0,
     right: 0,
     bottom: 0,
 });
-exports.fixedBottom = extend(exports.fixed, {
+exports.fixedBottom = typestyle_1.extend(exports.fixed, {
     right: 0,
     bottom: 0,
     left: 0,
 });
-exports.fixedLeft = extend(exports.fixed, {
+exports.fixedLeft = typestyle_1.extend(exports.fixed, {
     top: 0,
     bottom: 0,
     left: 0,
@@ -179,6 +174,10 @@ exports.newLayer = {
     right: 0,
     top: 0,
     bottom: 0,
+};
+exports.scroll = {
+    '-webkit-overflow-scrolling': 'touch',
+    overflow: 'auto'
 };
 var Box;
 (function (Box) {

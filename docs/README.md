@@ -1,10 +1,7 @@
 # Origin
-There has been a lot of discussion about the fact that HTML wasn't designed for web apps. HTML provides two general purpose primitive tags `div` and `span` and then a *whole lot of CSS* to style and layout this and other tags to your hearts content. But lets take a step back and imagine how a framework *desgined for application layouts* would look like.
+There has been a lot of discussion about the fact that HTML wasn't designed for web apps. HTML provides two general purpose primitive tags `div` and `span` and then a *whole lot of CSS* to style and layout this and other tags to your hearts content. But lets take a step back and imagine how a framework *designed for application layouts* would look like.
 
-Here's how this book will do it:
-
-## Not another CSS details book
-This book isn't about making you awesome at passing the next CSS interview. This book is focused on arming you with the tools that will allow you to create great maintainable applications. This also means that if some CSS property is unintuitive (or unmaintainable at scale) it will not be covered.
+> This document is focused on arming you with the tools that will allow you to create great maintainable applications. There are lots of CSS properties that are unintuitive (or unmaintainable at scale) will not be covered. Ofcourse you can still use them with TypeStyle if you want to.
 
 # Fundamental concepts
 There is very little fundamental knowledge you need. You really only need to know the difference between `margin` (something that's outside) and `padding` (something that is inside). Here's a picture:
