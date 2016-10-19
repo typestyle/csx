@@ -201,6 +201,14 @@ export var invisible: NestedCSSProperties = {
   visibility: 'hidden'
 };
 
+/**
+ * Smooth scrolling
+ */
+export const scroll: NestedCSSProperties = {
+  '-webkit-overflow-scrolling': 'touch',
+  overflow: 'auto'
+};
+
 ////////////////////
 // Fixed position //
 ////////////////////
@@ -238,31 +246,32 @@ export const fixedLeft: NestedCSSProperties = extend(fixed, {
 // A new layer  //
 //////////////////
 /**
- * New Layer parent
+ * New layer parent
  */
 export var newLayerParent: NestedCSSProperties = {
   position: 'relative',
 };
 
 /**
- *  You can have this anywhere and its like you have opened a new body
- *  This new layer will attach itself to the nearest parent with `position:relative` or `position:absolute` (which is what a new layer is by itself)
+ * Use this to attach to any parent layer
+ * and then you can use `left`/`top` etc to position yourself
  */
-export var newLayer: NestedCSSProperties = {
+export const attachToParentLayer: NestedCSSProperties = {
   position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
 };
 
 /**
- * Smooth scrolling
+ *  You can have this anywhere and its like you have opened a new body
+ *  This new layer will attach itself to the nearest parent with `position:relative` or `position:absolute` (which is what a new layer is by itself)
  */
-export const scroll: NestedCSSProperties = {
-  '-webkit-overflow-scrolling': 'touch',
-  overflow: 'auto'
-}
+export var newLayer: NestedCSSProperties = extend(
+  attachToParentLayer,
+  {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  });
 
 /**
  * Box helpers
