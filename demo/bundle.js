@@ -383,6 +383,10 @@
 	exports.invisible = {
 	    visibility: 'hidden'
 	};
+	exports.scroll = {
+	    '-webkit-overflow-scrolling': 'touch',
+	    overflow: 'auto'
+	};
 	exports.fixed = {
 	    position: 'fixed'
 	};
@@ -409,17 +413,15 @@
 	exports.newLayerParent = {
 	    position: 'relative',
 	};
-	exports.newLayer = {
+	exports.attachToParentLayer = {
 	    position: 'absolute',
+	};
+	exports.newLayer = typestyle_1.extend(exports.attachToParentLayer, {
 	    left: 0,
 	    right: 0,
 	    top: 0,
 	    bottom: 0,
-	};
-	exports.scroll = {
-	    '-webkit-overflow-scrolling': 'touch',
-	    overflow: 'auto'
-	};
+	});
 	var Box;
 	(function (Box) {
 	    function boxUnitToString(value) {
