@@ -7,7 +7,7 @@ An abstraction over CSS properties with semantic names for enhanced readability 
 
 **Install** `npm install csx --save`
 
-Just pass the objects exposed from `csx` to `typestyle.style` to get a class name e.g.
+**Use** Just pass the objects exposed from `csx` to `typestyle.style` to get a class name e.g.
 
 ```js
 import * as csx from 'csx';
