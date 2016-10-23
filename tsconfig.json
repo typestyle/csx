@@ -10,9 +10,9 @@
         "suppressImplicitAnyIndexErrors": true,
         "jsx": "react"
     },
-    "files": [
-        "./csx.ts",
-        "./demo/demo.tsx"
+    "include": [
+        "lib/**/*",
+        "demo/**/*"
     ],
     "compileOnSave": false
 }

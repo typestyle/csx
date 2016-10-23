@@ -1,9 +1,9 @@
 {
   "name": "csx",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "Utility styles for TypeStyle",
-  "main": "csx.js",
-  "typings": "csx",
+  "main": "./lib/csx.js",
+  "typings": "./lib/csx",
   "scripts": {
     "build:demo": "webpack --config ./webpack.config.js",
     "build:src": "tsc -p .",
