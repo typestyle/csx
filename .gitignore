@@ -1,4 +1,5 @@
 .alm
+lib/**/*.js
 
 # Logs
 logs
