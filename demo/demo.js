@@ -1,5 +1,5 @@
 "use strict";
-var csx = require("../lib/csx");
+var csx = require("typestyle/csx");
 var React = require("react");
 var ReactDOM = require("react-dom");
 var typestyle_1 = require("typestyle");
