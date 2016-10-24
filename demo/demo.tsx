@@ -1,4 +1,4 @@
-import * as csx from "../lib/csx";
+import * as csx from "typestyle/csx";
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {style, classes} from 'typestyle';
