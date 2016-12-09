@@ -1,18 +1,17 @@
 {
   "name": "csx",
-  "version": "7.0.0",
-  "description": "Utility styles for TypeStyle",
+  "version": "8.0.0",
+  "description": "Utility functions for TypeStyle",
   "main": "./lib/csx.js",
   "typings": "./lib/csx",
   "scripts": {
-    "build:demo": "webpack --config ./webpack.config.js",
-    "build:src": "tsc -p .",
-    "build": "npm run build:demo && npm run build:src",
-    "start": "tsc -w -p . & webpack-dev-server --host 0.0.0.0 --hot --inline --no-info --content-base ./demo --config webpack.config.js",
-    "prepush": "npm run build",
-    "test": "npm run build",
+    "start": "npm run build -- -w & npm run unittest -- --watch",
+    "build": "tsc -p .",
+    "unittest": "mocha ./lib/tests/**",
+    "test": "npm run build && npm run unittest",
     "preversion": "npm run build",
-    "postversion": "git push --follow-tags && npm publish"
+    "postversion": "git push --follow-tags && npm publish",
+    "u": "npm install typestyle@latest --save-exact --save-dev"
   },
   "repository": {
     "type": "git",
@@ -24,25 +23,21 @@
     "TSX",
     "Layout"
   ],
-  "author": "basaratali@gmail.com",
+  "author": "notoriousb1t@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/typestyle/csx/issues"
   },
   "homepage": "https://github.com/typestyle/csx#readme",
-  "devDependencies": {
-    "@types/react": "^0.14.41",
-    "@types/react-dom": "^0.14.18",
-    "husky": "^0.11.9",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "ts-loader": "^0.9.4",
-    "typescript": "2.1.0-dev.20161017",
-    "typestyle": "latest",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
-  },
-  "peerDependency": {
+  "peerDependencies": {
     "typestyle": "*"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.45",
+    "mocha": "^3.1.2",
+    "ts-node": "^1.5.2",
+    "typescript": "2.2.0-dev.20161130",
+    "typestyle": "0.15.0"
   }
 }

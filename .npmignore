@@ -1,3 +1,13 @@
-demo
-polymer
-docs
+# tests
+src/tests
+
+# build tools
+.travis.yml
+
+# editor settings
+.editorconfig
+.alm
+alm.json
+
+# npm 
+npm-debug.log*
