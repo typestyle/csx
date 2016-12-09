@@ -2,8 +2,8 @@
   "name": "csx",
   "version": "8.0.1",
   "description": "Utility functions for TypeStyle",
-  "main": "./lib/csx.js",
-  "typings": "./lib/csx",
+  "main": "./lib/index.js",
+  "typings": "./lib/index",
   "scripts": {
     "start": "npm run build -- -w & npm run unittest -- --watch",
     "build": "tsc -p .",
