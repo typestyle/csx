@@ -1,6 +1,6 @@
 {
   "name": "csx",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Utility functions for TypeStyle",
   "main": "./lib/csx.js",
   "typings": "./lib/csx",
