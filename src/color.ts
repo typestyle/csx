@@ -86,26 +86,31 @@ export class ColorHelper implements CSSHelper<'color'> {
    * Converts the stored color into string form (which is used by Free Style)
    */
   public toString(): string {
-    const v = this._values;
-    const c1 = roundFloat(v[R], 2);
-    const c2 = roundFloat(v[G], 2);
-    const c3 = roundFloat(v[2], 2);
-    const c4 = roundFloat(v[3], 5);
     const format = this._format;
+    const v = this._values;
     const hasAlpha = this._hasAlpha;
 
-    switch (format) {
-      case HSL:
-        return hasAlpha
-          ? cssFunction('hsla', c1, formatPercent(c2), formatPercent(c3), c4)
-          : cssFunction('hsl', c1, formatPercent(c2), formatPercent(c3));
-      case RGB:
-        return hasAlpha
-          ? cssFunction('rgba', c1, c2, c3, c4)
-          : cssFunction('rgb', c1, c2, c3);
+    let fnName: string;
+    let params: (number|string)[];
+
+    // find function name and resolve first three channels
+    if (format === RGB) {
+      fnName = hasAlpha ? 'rgba' : 'rgb';
+      params = [Math.round(v[R]), Math.round(v[G]), Math.round(v[B])];
+    } else if (format === HSL) {
+      fnName = hasAlpha ? 'hsla' : 'hsl';
+      params = [Math.round(v[H]), formatPercent(roundFloat(v[S], 2)), formatPercent(roundFloat(v[L], 2))];
+    } else {
+      throw new Error('Invalid color format');
     }
-    // throw an error?
-    throw new Error('Invalid color format');
+
+    // add alpha channel if needed
+    if (hasAlpha) {
+      params.push(roundFloat(v[A], 5));
+    }
+
+    // return as a string
+    return cssFunction(fnName, params);
   }
 
   /**

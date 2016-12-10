@@ -9,7 +9,7 @@ import { CSSHelper } from './interfaces';
 export function linearGradient(position: CSSAngle | CSSSideOrCorner, ...colors: (CSSColor | CSSColorStop)[]): CSSHelper<'gradient'> {
   return {
     type: 'gradient',
-    toString: () => cssFunction('linear-gradient', position, ...colors.map(flattenColorStops))
+    toString: () => cssFunction('linear-gradient', [position, ...colors.map(flattenColorStops)])
   };
 }
 
@@ -20,7 +20,7 @@ export function linearGradient(position: CSSAngle | CSSSideOrCorner, ...colors: 
 export function repeatingLinearGradient(position: CSSSideOrCorner, ...colors: (CSSColor | CSSColorStop)[]): CSSHelper<'gradient'> {
   return {
     type: 'gradient',
-    toString: () => cssFunction('repeating-linear-gradient', position, ...colors.map(flattenColorStops))
+    toString: () => cssFunction('repeating-linear-gradient', [position, ...colors.map(flattenColorStops)])
   };
 }
 

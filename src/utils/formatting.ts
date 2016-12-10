@@ -24,7 +24,7 @@ export function parseCSSFunction(stringValue: string): string[] | undefined {
   return [matches[1]].concat(matches[2].split(','));
 }
 
-export function cssFunction(functionName: string, ...params: (string|number|CSSHelper<string>)[]): string {
+export function cssFunction(functionName: string, params: (string|number|CSSHelper<string>)[]): string {
   const parts = params.map(ensureString).join(',');
   return `${functionName}(${parts})`;
 }
