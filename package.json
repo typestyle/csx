@@ -38,6 +38,6 @@
     "mocha": "^3.1.2",
     "ts-node": "^1.5.2",
     "typescript": "2.2.0-dev.20161130",
-    "typestyle": "0.15.0"
+    "typestyle": "0.18.2"
   }
 }
