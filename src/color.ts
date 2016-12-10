@@ -196,44 +196,44 @@ export class ColorHelper implements CSSHelper<'color'> {
   }
 
   public invert(): ColorHelper {
-    const v = (this._format === RGB ? this : this.toRGB())._values;
+    const v = ColorHelper.convertHelper(RGB, this)._values;
     return ColorHelper.convertHelper(
       this._format,
-      new ColorHelper(RGB, 255 - v[R], 255 - v[G], 255 - v[B], v[A], this._hasAlpha)
+      new ColorHelper(RGB, 255 - v[R], 255 - v[G], 255 - v[B], this._values[A], this._hasAlpha)
     );
   }
 
   public lighten(percent: string | number): ColorHelper {
-    const v = (this._format === HSL ? this : this.toHSL())._values;
+    const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][L];
     const l = v[L] + (max * ensurePercent(percent));
-    return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, v[A], this._hasAlpha));
+    return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
   public darken(percent: string | number): ColorHelper {
-    const v = (this._format === HSL ? this : this.toHSL())._values;
+    const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][L];
     const l = v[L] - (max * ensurePercent(percent));
-    return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, v[A], this._hasAlpha));
+    return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
   public saturate(percent: string | number): ColorHelper {
-    const v = (this._format === HSL ? this : this.toHSL())._values;
+    const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][S];
     const s = v[S] + (max * ensurePercent(percent));
     return ColorHelper.convertHelper(
       this._format,
-      new ColorHelper(HSL, v[H], s, v[L], v[A], this._hasAlpha)
+      new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha)
     );
   }
 
   public desaturate(percent: string | number): ColorHelper {
-    const v = (this._format === HSL ? this : this.toHSL())._values;
+    const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][S];
     const s = v[S] - (max * ensurePercent(percent));
     return ColorHelper.convertHelper(
       this._format,
-      new ColorHelper(HSL, v[H], s, v[L], v[A], this._hasAlpha)
+      new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha)
     );
   }
 
@@ -271,8 +271,8 @@ export class ColorHelper implements CSSHelper<'color'> {
   public mix(mixin: CSSColor, weight?: number): ColorHelper {
     const color1 = this;
     const color2 = ensureColor(mixin);
-    const c1 = (color1._format === RGB ? color1 : color1.toRGB())._values;
-    const c2 = (color2._format === RGB ? color2 : color2.toRGB())._values;
+    const c1 = ColorHelper.convertHelper(RGB, color1)._values;
+    const c2 = ColorHelper.convertHelper(RGB, color2)._values;
     const p = weight === undefined ? .5 : weight;
     const w = 2 * p - 1;
     const a = Math.abs(c1[A] - c2[A]);
@@ -300,10 +300,10 @@ export class ColorHelper implements CSSHelper<'color'> {
   }
 
   public spin(degrees: number): ColorHelper {
-    const v = (this._format === HSL ? this : this.toHSL())._values;
+    const v = ColorHelper.convertHelper(HSL, this)._values;
     return ColorHelper.convertHelper(
       this._format,
-      new ColorHelper(HSL, modDegrees(v[H] + degrees), v[S], v[L], v[A], this._hasAlpha)
+      new ColorHelper(HSL, modDegrees(v[H] + degrees), v[S], v[L], this._values[A], this._hasAlpha)
     );
   }
 
@@ -467,6 +467,7 @@ function RGBtoHSL(c0: number, c1: number, c2: number, c3: number, hasAlpha: bool
   const b = c2 / 255;
   const min = Math.min(r, g, b);
   const max = Math.max(r, g, b);
+  const l = (min + max) / 2;
   const delta = max - min;
 
   let h: number;
@@ -487,8 +488,6 @@ function RGBtoHSL(c0: number, c1: number, c2: number, c3: number, hasAlpha: bool
   if (h < 0) {
     h += 360;
   }
-
-  let l = (min + max) / 2;
 
   let s: number;
   if (max === min) {

@@ -332,6 +332,11 @@ describe('color', () => {
       const color2 = rgb(0, 0, 0).toString();
       assert.equal(color1, color2);
     });
+
+    it('keeps its alpha channel', () => {
+      const color1 = rgba(69, 86, 100, '70%').darken(.3);
+      assert.equal(color1.opacity() - .7 < 0.0001, true);
+    });
   });
 
   describe('saturate()', () => {
