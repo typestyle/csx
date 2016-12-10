@@ -1,9 +1,8 @@
 import * as assert from 'assert';
-import { css, style, keyframes, reinit } from 'typestyle';
 import {
   color, hsl, hsla, rgb, rgba, cyan, red, white,
   black, green, blue, purple, transparent, maroon
-} from '../../index';
+} from '../index';
 
 describe('color', () => {
   describe('toString()', () => {
@@ -62,42 +61,6 @@ describe('color', () => {
       assert.equal(color, 'hsl(0,100%,50%)');
     });
 
-    it('handles hsl in style', () => {
-      reinit();
-      style({
-        backgroundColor: hsl(0, '100%', '50%')
-      })
-      assert.equal(css(), '.f1ri67gz{background-color:hsl(0,100%,50%)}');
-    });
-
-    it('handles hsl in style with & interpolation', () => {
-      reinit();
-      style({
-        $nest: {
-          '&:hover': {
-            backgroundColor: hsl(0, '100%', '50%'),
-          }
-        }
-      });
-      assert.equal(css(), '.f5pxp3d:hover{background-color:hsl(0,100%,50%)}');
-    });
-
-    it('adds hsl into keyframes', () => {
-      reinit();
-      const colorAnimation = keyframes({
-        from: {
-          backgroundColor: hsl(250, '50%', '30%')
-        },
-        to: {
-          backgroundColor: hsl(250, '50%', '50%')
-        }
-      });
-      style({
-        animationName: colorAnimation
-      });
-      assert.equal(css(), '@keyframes fic7j4e{from{background-color:hsl(250,50%,30%)}to{background-color:hsl(250,50%,50%)}}.f1f9piqr{animation-name:fic7j4e}');
-    });
-
   });
 
   describe('hsla()', () => {
@@ -109,14 +72,6 @@ describe('color', () => {
     it('handles hsla with percent strings', () => {
       const color = hsla(0, '100%', '50%', .1).toString();
       assert.equal(color, 'hsla(0,100%,50%,0.1)');
-    });
-
-    it('adds hsla into style', () => {
-      reinit();
-      style({
-        backgroundColor: hsla(0, '100%', '50%', .1)
-      })
-      assert.equal(css(), '.f8x8s41{background-color:hsla(0,100%,50%,0.1)}');
     });
   });
 

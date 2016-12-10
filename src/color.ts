@@ -1,6 +1,6 @@
-import { cssFunction } from 'typestyle';
-import { ensurePercent, formatPercent, parseCSSFunction } from 'typestyle/lib/internal/formatting';
-import * as types from "typestyle/lib/types";
+import { CSSColor, CSSNamedColor } from "typestyle/lib/types";
+import { ensurePercent, formatPercent, parseCSSFunction, cssFunction } from './utils/formatting';
+import { CSSHelper } from './interfaces';
 
 const isTypeArraySupported = typeof Float32Array !== 'undefined';
 
@@ -30,7 +30,7 @@ const maxChannelValues = {
  * Creates a color from a hex color code or named color.
  * e.g. color('red') or color('#FF0000') or color('#F00'))
  */
-export function color(value: types.CSSNamedColor | string): ColorHelper {
+export function color(value: CSSNamedColor | string): ColorHelper {
   return parseNamedColor(value) || parseHexCode(value) || parseColorFunction(value) || parseNamedColor('red') !;
 }
 
@@ -65,7 +65,7 @@ export function rgba(red: number, blue: number, green: number, alpha: string | n
 /**
  * A CSS Color.  Includes utilities for converting between color types
  */
-export class ColorHelper {
+export class ColorHelper implements CSSHelper<'color'> {
   public type: 'color' = 'color';
   private _hasAlpha: boolean;
   private _values: number[];
@@ -235,7 +235,7 @@ export class ColorHelper {
     return new ColorHelper(this._format, v[R], v[G], v[B], a, true);
   }
 
-  public mix(mixin: types.CSSColor, weight?: number): ColorHelper {
+  public mix(mixin: CSSColor, weight?: number): ColorHelper {
     const color1 = this;
     const color2 = ensureColor(mixin);
     const c1 = (color1._format === RGB ? color1 : color1.toRGB())._values;
@@ -537,7 +537,7 @@ function clampColor(format: number, channel: number, value: number): number {
   return value < min ? min : value > max ? max : value;
 }
 
-function ensureColor(c: types.CSSColor): ColorHelper {
+function ensureColor(c: CSSColor): ColorHelper {
   return c instanceof ColorHelper ? c as ColorHelper : color(c as string);
 }
 
