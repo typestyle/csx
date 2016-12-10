@@ -289,13 +289,13 @@ describe('color', () => {
 
     it('inverts hsl', () => {
       const color1 = hsl(0, 1, .5).invert().toString();
-      const color2 = cyan.toString();
+      const color2 = cyan.toHSL().toString();
       assert.equal(color1, color2);
     });
 
     it('inverts hsla', () => {
       const color1 = hsla(0, 1, .5, 1).invert().toString();
-      const color2 = cyan.fade(1).toString();
+      const color2 = cyan.toHSLA().toString();
       assert.equal(color1, color2);
     });
   });
@@ -303,13 +303,13 @@ describe('color', () => {
   describe('lighten()', () => {
     it('lightens black to white', () => {
       const color1 = black.lighten(1).toString();
-      const color2 = white.toHSL().toString();
+      const color2 = white.toString();
       assert.equal(color1, color2);
     });
 
     it('lightens black to gray', () => {
       const color1 = black.lighten(.5).toString();
-      const color2 = hsl(0, 0, .5).toString();
+      const color2 = rgb(128, 128, 128).toString();
       assert.equal(color1, color2);
     });
   });
@@ -317,13 +317,19 @@ describe('color', () => {
   describe('darken()', () => {
     it('changes white to black', () => {
       const color1 = white.darken(1).toString();
-      const color2 = black.toHSL().toString();
+      const color2 = black.toString();
       assert.equal(color1, color2);
     });
 
     it('changes black to gray', () => {
-      const color1 = white.darken(.5).toString();
+      const color1 = white.darken(.5).toHSL().toString();
       const color2 = hsl(0, 0, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('keeps the color format it started with', () => {
+      const color1 = rgb(255, 0, 0).darken(.5).toString();
+      const color2 = rgb(0, 0, 0).toString();
       assert.equal(color1, color2);
     });
   });
@@ -351,42 +357,42 @@ describe('color', () => {
 
     it('changes red to white', () => {
       const color1 = red.desaturate(1).toString();
-      const color2 = hsl(0, 0, .5).toString();
+      const color2 = rgb(128, 128, 128).toString();
       assert.equal(color1, color2);
     });
   });
 
   describe('grayscale()', () => {
     it('handles red', () => {
-      const color1 = red.grayscale();
+      const color1 = red.grayscale().toHSL();
       assert.equal(color1.hue(), 0);
       assert.equal(color1.saturation(), 0);
       assert.equal(Math.round(color1.lightness() * 100), 50);
     });
 
     it('handles green', () => {
-      const color1 = green.grayscale();
-      assert.equal(color1.hue(), 120);
+      const color1 = green.grayscale().toHSL();
+      assert.equal(color1.hue(), 0);
       assert.equal(color1.saturation(), 0);
       assert.equal(Math.round(color1.lightness() * 100), 25);
     });
 
     it('handles blue', () => {
-      const color1 = blue.grayscale();
-      assert.equal(color1.hue(), 240);
+      const color1 = blue.grayscale().toHSL();
+      assert.equal(color1.hue(), 0);
       assert.equal(color1.saturation(), 0);
       assert.equal(Math.round(color1.lightness() * 100), 50);
     });
 
     it('handles white', () => {
       const color1 = white.grayscale().toString();
-      const color2 = hsl(0, 0, 1).toString();
+      const color2 = white.toString();
       assert.equal(color1, color2);
     });
 
     it('handles black', () => {
       const color1 = black.grayscale().toString();
-      const color2 = hsl(0, 0, 0).toString();
+      const color2 = rgb(0, 0, 0).toString();
       assert.equal(color1, color2);
     });
   });
@@ -560,13 +566,13 @@ describe('color', () => {
 
   describe('spin()', () => {
     it('spinning 360 degrees returns same color', () => {
-      const color1 = red.toHSL().toString();
+      const color1 = red.toString();
       const color2 = red.spin(360).toString();
       assert.equal(color1, color2);
     });
 
     it('spinning -360 degrees returns same color', () => {
-      const color1 = red.toHSL().toString();
+      const color1 = red.toString();
       const color2 = red.spin(-360).toString();
       assert.equal(color1, color2);
     });
