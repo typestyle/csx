@@ -212,8 +212,7 @@ export class ColorHelper implements CSSHelper<'color'> {
 
   public darken(percent: string | number): ColorHelper {
     const v = ColorHelper.convertHelper(HSL, this)._values;
-    const max = maxChannelValues[HSL][L];
-    const l = v[L] - (max * ensurePercent(percent));
+    const l = v[L] - (v[L] * ensurePercent(percent));
     return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
