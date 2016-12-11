@@ -210,10 +210,9 @@ export class ColorHelper implements CSSHelper<'color'> {
     return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
-  public darken(percent: string | number): ColorHelper {
+  public darken(percent: string | number, relative?: boolean): ColorHelper {
     const v = ColorHelper.convertHelper(HSL, this)._values;
-    const max = maxChannelValues[HSL][L];
-    const l = v[L] - (max * ensurePercent(percent));
+    const l = v[L] - ((relative ? v[L] : maxChannelValues[HSL][L]) * ensurePercent(percent));
     return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
