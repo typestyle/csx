@@ -306,11 +306,20 @@ describe('color', () => {
       const color2 = white.toString();
       assert.equal(color1, color2);
     });
-
     it('lightens black to gray', () => {
       const color1 = black.lighten(.5).toString();
       const color2 = rgb(128, 128, 128).toString();
       assert.equal(color1, color2);
+    });
+    it('lightens from the absolute max', () => {
+      const color1 = hsl(25, 1, .2).lighten(.3).toString();
+      const color2 = hsl(25, 1, .5).toString();
+      assert.equal(color1, color2);
+    });
+    it('lightens from the current color', () => {
+      const color1 = hsl(25, 1, .2).lighten(.3, true);
+      const color2 = hsl(25, 1, .44);
+      assert.equal(color1.lightness(), color2.lightness());
     });
   });
 
@@ -337,6 +346,18 @@ describe('color', () => {
       const color1 = rgba(69, 86, 100, '70%').darken(.3);
       assert.equal(color1.opacity() - .7 < 0.0001, true);
     });
+
+    it('darkens from the absolute max', () => {
+      const color1 = hsl(25, 1, .8).darken(.3).toString();
+      const color2 = hsl(25, 1, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('darkens from the current color', () => {
+      const color1 = hsl(25, 1, .8).darken(.3, true).toString();
+      const color2 = hsl(25, 1, .56).toString();
+      assert.equal(color1, color2);
+    });
   });
 
   describe('saturate()', () => {
@@ -351,6 +372,18 @@ describe('color', () => {
       const color2 = hsl(0, 1, 1).toString();
       assert.equal(color1, color2);
     });
+    it('saturates from the absolute max', () => {
+      const color1 = hsl(25, .2, .5).saturate(.3).toString();
+      const color2 = hsl(25, .5, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('saturates from the current color', () => {
+      const color1 = hsl(25, .2, .5).saturate(.3, true).toString();
+      const color2 = hsl(25, .44, .5).toString();
+      assert.equal(color1, color2);
+    });
+
   });
 
   describe('desaturate()', () => {
@@ -363,6 +396,18 @@ describe('color', () => {
     it('changes red to white', () => {
       const color1 = red.desaturate(1).toString();
       const color2 = rgb(128, 128, 128).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('desaturates from the absolute max', () => {
+      const color1 = hsl(25, .8, .5).desaturate(.3).toString();
+      const color2 = hsl(25, .5, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('desaturates from the current color', () => {
+      const color1 = hsl(25, .8, .5).desaturate(.3, true).toString();
+      const color2 = hsl(25, .56, .5).toString();
       assert.equal(color1, color2);
     });
   });
@@ -476,6 +521,18 @@ describe('color', () => {
       const color2 = rgba(255, 0, 0, 0).toString();
       assert.equal(color1, color2);
     });
+
+    it('fades out from the absolute max', () => {
+      const color1 = rgba(255, 0, 0, .8).fadeOut(.3).toString();
+      const color2 = rgba(255, 0, 0, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('fades out from the current opacity', () => {
+      const color1 = rgba(255, 0, 0, .8).fadeOut(.3, true).toString();
+      const color2 = rgba(255, 0, 0, .56).toString();
+      assert.equal(color1, color2);
+    });
   });
 
 
@@ -509,14 +566,26 @@ describe('color', () => {
       const color2 = rgba(255, 0, 0, 1).toString();
       assert.equal(color1, color2);
     });
+
+    it('fades in from the absolute max', () => {
+      const color1 = rgba(255, 0, 0, .2).fadeIn(.3).toString();
+      const color2 = rgba(255, 0, 0, .5).toString();
+      assert.equal(color1, color2);
+    });
+
+    it('fades in from the current opacity', () => {
+      const color1 = rgba(255, 0, 0, .2).fadeIn(.3, true);
+      const color2 = rgba(255, 0, 0, .44);
+      assert.equal(color1.lightness(), color2.lightness());
+    });
   });
 
   describe('mix()', () => {
-     // $c0: mix(red, green);
-     // $c1: mix(red, blue);
-     // $c2: mix(red, white);
-     // $c3: mix(red, transparent);
-     // $c4: mix(red, black);
+    // $c0: mix(red, green);
+    // $c1: mix(red, blue);
+    // $c2: mix(red, white);
+    // $c3: mix(red, transparent);
+    // $c4: mix(red, black);
 
     it('red + green', () => {
       // sass converts rgb to hex, so the actual result should be

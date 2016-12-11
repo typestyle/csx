@@ -203,10 +203,10 @@ export class ColorHelper implements CSSHelper<'color'> {
     );
   }
 
-  public lighten(percent: string | number): ColorHelper {
+  public lighten(percent: string | number, relative?: boolean): ColorHelper {
     const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][L];
-    const l = v[L] + (max * ensurePercent(percent));
+    const l = v[L] + ((relative ? (max - v[L]) : max) * ensurePercent(percent));
     return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
@@ -216,20 +216,20 @@ export class ColorHelper implements CSSHelper<'color'> {
     return ColorHelper.convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
   }
 
-  public saturate(percent: string | number): ColorHelper {
+  public saturate(percent: string | number, relative?: boolean): ColorHelper {
     const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][S];
-    const s = v[S] + (max * ensurePercent(percent));
+    const s = v[S] + ((relative ? (max - v[S]) : max) * ensurePercent(percent));
     return ColorHelper.convertHelper(
       this._format,
       new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha)
     );
   }
 
-  public desaturate(percent: string | number): ColorHelper {
+  public desaturate(percent: string | number, relative?: boolean): ColorHelper {
     const v = ColorHelper.convertHelper(HSL, this)._values;
     const max = maxChannelValues[HSL][S];
-    const s = v[S] - (max * ensurePercent(percent));
+    const s = v[S] - ((relative ? v[S] : max) * ensurePercent(percent));
     return ColorHelper.convertHelper(
       this._format,
       new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha)
@@ -249,18 +249,20 @@ export class ColorHelper implements CSSHelper<'color'> {
     );
   }
 
-  public fadeOut(percent: string | number): ColorHelper {
+  public fadeOut(percent: string | number, relative?: boolean): ColorHelper {
     const v = this._values;
-    const a = clampColor(RGB, A, v[A] - ensurePercent(percent));
+    const max = 1;
+    const a = clampColor(RGB, A, v[A] - ((relative ? v[A] : max) * ensurePercent(percent)));
     return ColorHelper.convertHelper(
       this._format,
       new ColorHelper(this._format, v[R], v[G], v[B], a, true)
     );
   }
 
-  public fadeIn(percent: string | number): ColorHelper {
+  public fadeIn(percent: string | number, relative?: boolean): ColorHelper {
     const v = this._values;
-    const a = clampColor(RGB, A, v[A] + ensurePercent(percent));
+    const max = 1;
+    const a = clampColor(RGB, A, v[A] + ((relative ? v[A] : max) * ensurePercent(percent)));
     return ColorHelper.convertHelper(
       this._format,
       new ColorHelper(this._format, v[R], v[G], v[B], a, true)
