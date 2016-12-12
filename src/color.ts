@@ -127,7 +127,7 @@ export class ColorHelper implements CSSHelper<'color'> {
    * Converts to hex rgb(255, 255, 255) to #FFFFFF
    */
   public toHexString(): string {
-    const v = (this._format === RGB ? this : this.toRGB())._values;
+    const v = ColorHelper.convertHelper(RGB, this)._values;
     return '#' + (toHex(v[R]) + toHex(v[G]) + toHex(v[B])).toUpperCase();
   }
 
@@ -450,7 +450,8 @@ export const {aliceblue, antiquewhite, aqua, aquamarine, azure, beige, bisque, b
   rebeccapurple, red, silver, teal, transparent, white, yellow } = namedColors;
 
 function toHex(n: number): string {
-  return (n < 16 ? '0' : '') + Math.round(n).toString(16);
+  const i = Math.round(n);
+  return (i < 16 ? '0' : '') + i.toString(16);
 }
 
 function modDegrees(n: number): number {

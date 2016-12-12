@@ -161,6 +161,11 @@ describe('color', () => {
       const color = rgb(0, 127.5, 0).toHexString();
       assert.equal(color, '#008000');
     });
+
+    it('converts to a # and a six digit hex code', () => {
+      const c = color('#16A085').darken('10%').toHexString();
+      assert.equal(c.length, 7);
+    })
   });
 
   describe('toHSL()', () => {
