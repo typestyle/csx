@@ -4,6 +4,8 @@ export function quote(val: string): string {
     return `'${val}'`;
 }
 
+export function important<T extends string>(val: number | string): string;
+export function important<T extends string>(val: CSSHelper<T>): CSSHelper<T>;
 export function important<T extends string>(val: number | string | CSSHelper<T>): string | CSSHelper<T> {
     if (!val && val !== 0) {
         return '';
