@@ -5,3 +5,4 @@
 /** CSS Colors functions */
 export * from './color';
 export * from './gradient';
+export * from './strings';
