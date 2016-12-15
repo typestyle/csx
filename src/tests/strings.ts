@@ -9,7 +9,7 @@ describe("csx/quote", () => {
 
     it("quotes \" correctly", () => {
         const title = quote('A title "Should be in Quotes"');
-        assert.equal(title, "'A title \\\"Should be in Quotes\\\"'");
+        assert.equal(title, "'A title \"Should be in Quotes\"'");
     });
     
     it("quotes around the string", () => {
