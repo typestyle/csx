@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run build -- -w & npm run unittest -- --watch",
     "build": "tsc -p .",
-    "unittest": "mocha ./lib/tests/**",
+    "unittest": "mocha ./lib/tests/**/*.js",
     "test": "npm run build && npm run unittest",
     "preversion": "npm run build",
     "postversion": "git push --follow-tags && npm publish",
