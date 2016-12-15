@@ -5,8 +5,7 @@ export function quote(val: string): string;
 export function quote(val: CSSHelper<string>): string;
 export function quote(val: number | string | CSSHelper<string>): string {
   const val2 = (val || val === 0 ? val.toString() : '')
-    .replace(/\'/g, "\\'")
-    .replace(/\"/g, '\\"');
+    .replace(/\'/g, "\\'");
   return `'${val2}'`;
 }
 
