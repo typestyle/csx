@@ -1,5 +1,22 @@
-import { rgb, important, quote } from '../index';
+import { rgb, important, quote, url } from '../index';
 import * as assert from 'assert';
+
+describe("csx/important", () => {
+    it("converts numbers to ${number} !important", () => {
+        const numberToString = important(42);
+        assert.equal(numberToString, '42 !important');
+    });
+
+    it("converts strings to ${string} !important", () => {
+        const str = important('red');
+        assert.equal(str, 'red !important');
+    });
+
+    it("converts helpers to string", () => {
+        const importantColor = important(rgb(255, 0, 0));
+        assert.equal(importantColor, 'rgb(255,0,0) !important');
+    });
+});
 
 describe("csx/quote", () => {
     it("quotes ' correctly", () => {
@@ -18,19 +35,9 @@ describe("csx/quote", () => {
     });
 });
 
-describe("csx/important", () => {
-    it("converts numbers to ${number} !important", () => {
-        const numberToString = important(42);
-        assert.equal(numberToString, '42 !important');
-    });
-
-    it("converts strings to ${string} !important", () => {
-        const str = important('red');
-        assert.equal(str, 'red !important');
-    });
-
-    it("converts helpers to string", () => {
-        const importantColor = important(rgb(255, 0, 0));
-        assert.equal(importantColor, 'rgb(255,0,0) !important');
+describe("csx/url", () => {
+    it("converts a string to url(string)", () => {
+        const urlString = url('http://somewhere');
+        assert.equal(urlString, 'url(http://somewhere)');
     });
 });
