@@ -1,6 +1,6 @@
 import { CSSColor, CSSNamedColor } from "typestyle/lib/types";
 import { ensurePercent, formatPercent, parseCSSFunction, cssFunction } from './utils/formatting';
-import { CSSHelper } from './interfaces';
+import { StringType } from './interfaces';
 
 const isTypeArraySupported = typeof Float32Array !== 'undefined';
 
@@ -65,8 +65,7 @@ export function rgba(red: number, blue: number, green: number, alpha: string | n
 /**
  * A CSS Color.  Includes utilities for converting between color types
  */
-export class ColorHelper implements CSSHelper<'color'> {
-  public type: 'color' = 'color';
+export class ColorHelper implements StringType<CSSColor> {
   protected _hasAlpha: boolean;
   protected _values: number[];
   protected _format: number;
@@ -95,7 +94,7 @@ export class ColorHelper implements CSSHelper<'color'> {
   /**
    * Converts the stored color into string form (which is used by Free Style)
    */
-  public toString(): string {
+  public toString(): CSSColor {
     const format = this._format;
     const v = this._values;
     const hasAlpha = this._hasAlpha;
@@ -269,7 +268,7 @@ export class ColorHelper implements CSSHelper<'color'> {
     );
   }
 
-  public mix(mixin: CSSColor, weight?: number): ColorHelper {
+  public mix(mixin: CSSColor | ColorHelper, weight?: number): ColorHelper {
     const color1 = this;
     const color2 = ensureColor(mixin);
     const c1 = ColorHelper.convertHelper(RGB, color1)._values;
@@ -576,7 +575,7 @@ function clampColor(format: number, channel: number, value: number): number {
   return value < min ? min : value > max ? max : value;
 }
 
-function ensureColor(c: CSSColor): ColorHelper {
+function ensureColor(c: CSSColor | ColorHelper): ColorHelper {
   return c instanceof ColorHelper ? c as ColorHelper : color(c as string);
 }
 

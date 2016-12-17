@@ -51,7 +51,7 @@ describe("csx/list", () => {
   it("supports multiple helper types", () => {
     const imageList = list(
       linearGradient('top', 'red', 'blue'),
-      rgb(255, 255, 0)
+      rgb(255, 255, 0).toString()
     );
     assert.equal(imageList, 'linear-gradient(top,red,blue),rgb(255,255,0)');
   });

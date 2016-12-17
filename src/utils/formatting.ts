@@ -1,15 +1,8 @@
-import { CSSHelper } from '../interfaces';
 
 export function ensurePercent(value: string | number): number {
   return typeof value === 'number'
     ? value as number
-    : parseFloat(ensureString(value)) * .01;
-}
-
-export function ensureString(x: any): string {
-  return typeof (x as CSSHelper<string>).type === 'string'
-    ? x.toString()
-    : x as string;
+    : parseFloat(value) * .01;
 }
 
 export function formatPercent(value: number): string {
@@ -24,7 +17,7 @@ export function parseCSSFunction(stringValue: string): string[] | undefined {
   return [matches[1]].concat(matches[2].split(','));
 }
 
-export function cssFunction(functionName: string, params: (string|number|CSSHelper<string>)[]): string {
-  const parts = params.map(ensureString).join(',');
+export function cssFunction(functionName: string, params: (string|number)[]): string {
+  const parts = params.join(',');
   return `${functionName}(${parts})`;
 }
