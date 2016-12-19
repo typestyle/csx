@@ -1,9 +1,6 @@
 import { CSSImage, CSSPosition, CSSLength, CSSPercentage, CSSRepeatStyle, CSSBox, CSSColor } from 'typestyle/lib/types';
 
-/**
- * Creates a `background` shorthand value.
- */
-export function background(...backgrounds: {
+export type CsxBackground = {
     image?: CSSImage;
     position?: CSSPosition;
     size?: 'auto' | 'cover' | 'contain' | CSSLength | CSSPercentage;
@@ -12,7 +9,12 @@ export function background(...backgrounds: {
     clip?: 'border-box' | 'padding-box' | 'content-box' | 'text';
     attachment?: 'scroll' | 'fixed' | 'local'
     color?: CSSColor;
-}[]): string {
+};
+
+/**
+ * Creates a `background` shorthand value.
+ */
+export function background(...backgrounds: CsxBackground[]): string {
     return (backgrounds || [])
         .map(background => {
             let s = '';
