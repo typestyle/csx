@@ -12,7 +12,8 @@ export type CsxBackground = {
 };
 
 /**
- * Creates a `background` shorthand value.
+ * Creates a `background` shorthand value. You can supply multiple backgrounds, but the `background-color` can only be defined on the last background, as there is only one background color for an element.
+ * @see https://developer.mozilla.org/en-US/docs/Web/CSS/background
  */
 export function background(...backgrounds: CsxBackground[]): string {
     return (backgrounds || [])
