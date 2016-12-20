@@ -22,6 +22,13 @@ export function em(val: number): CSSLength {
 }
 
 /**
+ * Returns the number with a suffix of rad
+ */
+export function rad(val: number): CSSLength {
+  return `${val}rad`;
+}
+
+/**
  * Returns the number with a suffix of rem
  */
 export function rem(val: number): CSSLength {
@@ -40,4 +47,11 @@ export function viewHeight(val: number): CSSLength {
  */
 export function viewWidth(val: number): CSSLength {
   return `${val}vw`;
+}
+
+/**
+ * Returns the number with a suffix of turn
+ */
+export function turn(val: number): CSSLength {
+  return `${val}turn`;
 }
