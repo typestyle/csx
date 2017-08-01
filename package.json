@@ -4,9 +4,12 @@
   "description": "Utility functions for TypeStyle",
   "main": "./lib/index.js",
   "typings": "./lib/index",
+  "types": "./lib/index",
   "scripts": {
     "start": "npm run build -- -w & npm run unittest -- --watch",
     "build": "tsc -p . && webpack",
+    "clean": "node_modules/.bin/del-cli -f lib umd",
+    "prebuild": "npm run clean",
     "unittest": "mocha ./lib/tests/**/*.js",
     "test": "npm run build && npm run unittest",
     "preversion": "npm run build",
@@ -35,6 +38,7 @@
   "devDependencies": {
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.27",
+    "del-cli": "^1.1.0",
     "mocha": "^3.4.2",
     "ts-loader": "^2.1.0",
     "ts-node": "^3.0.4",

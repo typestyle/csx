@@ -1,12 +1,15 @@
-# tests
-src/tests
+# source files
+src/
 
 # build tools
 .travis.yml
+tsconfig.json
+webpack.config.js
 
 # editor settings
 .editorconfig
 .alm
+.vscode
 alm.json
 
 # npm 
