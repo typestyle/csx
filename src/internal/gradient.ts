@@ -1,6 +1,6 @@
 import { CSSAngle, CSSColor, CSSSideOrCorner, CSSGradient } from 'typestyle/lib/types';
-import { CsxColorStop, StringType } from './interfaces';
-import { cssFunction } from './utils/formatting';
+import { CsxColorStop, StringType } from '../types';
+import { cssFunction } from '../utils';
 
 /**
  * Helper for the linear-gradient function in CSS

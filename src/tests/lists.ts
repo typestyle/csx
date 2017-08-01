@@ -37,7 +37,7 @@ describe("csx/list", () => {
       '',
       6
     );
-    assert.equal(holeyList, 'one,four,6');
+    assert.equal(holeyList, 'one,four,6px');
   });
 
   it("calls .toString() on other helpers", () => {

@@ -23,7 +23,7 @@
     "TSX",
     "Layout"
   ],
-  "author": "notoriousb1t@gmail.com",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/typestyle/csx/issues"
@@ -33,14 +33,14 @@
     "typestyle": "*"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.32",
-    "@types/node": "^6.0.45",
-    "mocha": "^3.1.2",
-    "ts-loader": "^1.3.3",
-    "ts-node": "^1.5.2",
-    "typescript": "2.2.0-dev.20161130",
-    "typestyle": "0.21.4",
-    "uglify-loader": "^1.4.0",
-    "webpack": "^1.14.0"
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.27",
+    "mocha": "^3.4.2",
+    "ts-loader": "^2.1.0",
+    "ts-node": "^3.0.4",
+    "typescript": "^2.3.4",
+    "typestyle": "^1.3.2",
+    "uglify-loader": "^2.0.0",
+    "webpack": "^2.6.1"
   }
 }

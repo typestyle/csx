@@ -1,4 +1,4 @@
-import { rgb, important, quote, url } from '../index';
+import { calc, rgb, important, quote, url, px, viewWidth } from '../index';
 import * as assert from 'assert';
 
 describe("csx/important", () => {
@@ -17,6 +17,18 @@ describe("csx/important", () => {
         assert.equal(importantColor, 'rgb(255,0,0) !important');
     });
 });
+
+describe("csx/calc", () => {
+    it("adds calc to expression", () => {
+        const actual = calc('9px');
+        assert.equal(actual, "calc(9px)");
+    });
+    it("adds calc to a backtick string", () => {
+        const actual = calc(`${viewWidth(100)} - ${px(9)}`);
+        assert.equal(actual, "calc(100vw - 9px)");
+    });
+});
+
 
 describe("csx/quote", () => {
     it("quotes ' correctly", () => {

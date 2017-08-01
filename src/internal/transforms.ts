@@ -1,5 +1,5 @@
 import { CSSTransformFunction, CSSLength, CSSPercentage } from 'typestyle/lib/types';
-import { cssFunction as f } from './utils/formatting';
+import { cssFunction as f } from '../utils';
 
 /**
  * The CSS transform property lets you modify the coordinate space of the CSS visual formatting model. Using it, elements can be translated, rotated, scaled, and skewed.
