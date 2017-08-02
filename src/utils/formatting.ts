@@ -1,6 +1,7 @@
 import { List } from '../types';
 
-const functionExpression = /[\s]*([a-z-]+)[\s]*\([\s]*([^\)]+)[\s]*\)[\s]*/i;
+const functionExpression = /[\s]*([a-z-]+)[\s]*\([\s]*([^\)]+)[\s]*\)[\s]*/i; 
+const floatExpression = /^(\-?\d+\.?\d{0,5})/;
 
 export const formatUnit = <T>(unit: string) => (val: number) => (val + unit) as any as T;
 
@@ -11,7 +12,14 @@ export function ensurePercent(value: string | number): number {
 }
 
 export function formatPercent(value: number): string {
-  return (value * 100) + '%'
+  return (formatFloat(value * 100)) + '%'
+}
+
+/**
+ * Returns a number formatted to a max number of 5 decimal places
+ */
+export function formatFloat(n: number) { 
+  return floatExpression.exec(n.toString())![1]
 }
 
 export function ensureLength(value: number | string | undefined): string | undefined {

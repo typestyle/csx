@@ -1,5 +1,12 @@
 import { CSSColor, CSSNamedColor } from "typestyle/lib/types";
-import { ensurePercent, formatPercent, parseCSSFunction, cssFunction } from '../utils';
+import {
+  ensurePercent,
+  formatPercent,
+  parseCSSFunction,
+  cssFunction,
+  formatFloat,
+  roundFloat
+} from "../utils";
 import { StringType } from '../types';
 
 const isTypeArraySupported = typeof Float32Array !== 'undefined';
@@ -108,14 +115,14 @@ export class ColorHelper implements StringType<CSSColor> {
       params = [Math.round(v[R]), Math.round(v[G]), Math.round(v[B])];
     } else if (format === HSL) {
       fnName = hasAlpha ? 'hsla' : 'hsl';
-      params = [Math.round(v[H]), formatPercent(roundFloat(v[S], 2)), formatPercent(roundFloat(v[L], 2))];
+      params = [Math.round(v[H]), formatPercent(roundFloat(v[S], 100)), formatPercent(roundFloat(v[L], 100))];
     } else {
       throw new Error('Invalid color format');
     }
 
     // add alpha channel if needed
     if (hasAlpha) {
-      params.push(roundFloat(v[A], 5));
+      params.push(formatFloat(roundFloat(v[A], 100000)));
     }
 
     // return as a string
@@ -456,10 +463,6 @@ function toHex(n: number): string {
 function modDegrees(n: number): number {
   // note: maybe there is a way to simplify this
   return ((n < 0 ? 360 : 0) + (n % 360)) % 360;
-}
-
-function roundFloat(n: number, places: number): number {
-  return Math.round(10 ** places * n) * (10 ** -places);
 }
 
 function RGBtoHSL(c0: number, c1: number, c2: number, c3: number, hasAlpha: boolean): ColorHelper {
