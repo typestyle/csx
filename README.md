@@ -10,7 +10,7 @@ CSS functions and Typed CSS values e.g. an excellent `color` API. Use with TypeS
 
 # Docs 
 
-[http://typestyle.io](http://typestyle.io)
+[https://typestyle.github.io](https://typestyle.github.io)
 
 [travis-image]:https://travis-ci.org/typestyle/csx.svg?branch=master
 [travis-url]:https://travis-ci.org/typestyle/csx
