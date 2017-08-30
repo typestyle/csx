@@ -1,9 +1,12 @@
 # source files
 src/
+lib/tests/
+lib.es2015/tests/
 
 # build tools
 .travis.yml
 tsconfig.json
+tsconfig.es2015.json
 webpack.config.js
 
 # editor settings
