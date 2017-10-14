@@ -1,4 +1,4 @@
-import * as csx from '../index';
+import * as csx from '../src/index';
 import * as assert from 'assert';
 
 describe("csx/gradient", () => {

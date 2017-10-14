@@ -6,3 +6,13 @@
 export function roundFloat(n: number, factor: number): number {
   return Math.round(n * factor) / factor;
 }
+
+export function toHex(n: number): string {
+  const i = Math.round(n)
+  return (i < 16 ? '0' : '') + i.toString(16)
+}
+
+export function modDegrees(n: number): number {
+  // note: maybe there is a way to simplify this
+  return ((n < 0 ? 360 : 0) + n % 360) % 360
+}

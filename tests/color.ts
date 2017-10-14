@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import {
   color, hsl, hsla, rgb, rgba, cyan, red, white,
   black, green, blue, purple, transparent, maroon
-} from '../index';
+} from '../src/index';
 
 describe('color', () => {
   describe('toString()', () => {

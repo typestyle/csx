@@ -1,4 +1,4 @@
-import { list, rgb, hsl, linearGradient } from '../index';
+import { list, rgb, hsl, linearGradient } from '../src/index';
 import * as assert from 'assert';
 
 describe("csx/list", () => {
