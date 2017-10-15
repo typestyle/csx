@@ -1,5 +1,5 @@
 import * as names from './names'
-import { ColorHelper, parsers } from './color-helper' 
+import { ColorHelper, colorParsers } from './color-helper' 
 
 /**
  * Named colors in the CSS spec. They must be loaded after exported functions and constructor
@@ -12,4 +12,4 @@ export function parseNamedColor(stringValue: string): ColorHelper | undefined {
 }
 
 // add to parsers
-parsers.push(parseNamedColor)
+colorParsers.push(parseNamedColor)

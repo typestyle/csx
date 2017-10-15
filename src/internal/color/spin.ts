@@ -1,17 +1,18 @@
-import { ColorHelper, convert } from './color-helper' 
+import { ColorHelper, convert, createColor, colorPrototype } from './color-helper' 
 import { modDegrees } from '../../utils/math'
-import { HSL, H, S, L, A } from './constants' 
+import { HSL } from './constants' 
 
 export function spin(this: ColorHelper, degrees: number): ColorHelper {
-    const v = this.toHSL().channels
+    const original = this
+    const v = original.toHSL()
     return convert(
-        new ColorHelper(HSL, modDegrees(v[H] + degrees), v[S], v[L], this.channels[A], this.isAlpha),
-        this.type,
-        this.isAlpha
+        createColor(HSL, modDegrees(v.c1 + degrees), v.c2, v.c3, original.a, original.isAlpha),
+        original.s,
+        original.isAlpha
     )
 }
 
-ColorHelper.prototype.spin = spin
+colorPrototype.spin = spin
 
 declare module './color-helper' {
     interface ColorHelper {

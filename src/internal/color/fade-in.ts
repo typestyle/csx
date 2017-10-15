@@ -1,7 +1,5 @@
-import { ColorHelper } from './color-helper'
-import { clampColor } from './clamp-color'
+import { ColorHelper, createColor, colorPrototype } from './color-helper'
 import { ensurePercent } from '../../utils/formatting'
-import { RGB, R, G, B, A } from './constants'
 
 /**
  * 
@@ -10,14 +8,14 @@ import { RGB, R, G, B, A } from './constants'
  * @param relative 
  */
 export function fadeIn(this: ColorHelper, percent: string | number, relative?: boolean): ColorHelper {
-    const v = this.channels
+    const v = this
     const max = 1
-    const a = clampColor(RGB, A, v[A] + (relative ? v[A] : max) * ensurePercent(percent))
+    const a = v.a + (relative ? v.a : max) * ensurePercent(percent)
     
-    return new ColorHelper(this.type, v[R], v[G], v[B], a, true)
+    return createColor(v.s, v.c1, v.c2, v.c3, a, true)
 }
 
-ColorHelper.prototype.fadeIn = fadeIn
+colorPrototype.fadeIn = fadeIn
 
 declare module './color-helper' {
     interface ColorHelper {

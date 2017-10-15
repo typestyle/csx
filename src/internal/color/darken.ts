@@ -1,14 +1,15 @@
-import { ColorHelper } from './color-helper'
-import { HSL, L, maxChannelValues, A, H, S } from './constants'
+import { ColorHelper, colorPrototype, createColor, convert } from './color-helper'
+import { HSL, L, maxChannelValues } from './constants'
 import { ensurePercent } from '../../utils/formatting'
 
 export function darken(this: ColorHelper, percent: string | number, relative?: boolean): ColorHelper {
-    const v = this.toHSL().channels
-    const l = v[L] - (relative ? v[L] : maxChannelValues[HSL][L]) * ensurePercent(percent)
-    return new ColorHelper(this.type, v[H], v[S], l, v[A], this.isAlpha)
+    const current = this
+    const v = current.toHSL()
+    const l = v.c3 - (relative ? v.c3 : maxChannelValues[HSL][L]) * ensurePercent(percent)
+    return convert(createColor(HSL, v.c1, v.c2, l, v.a, current.isAlpha), current.s, current.isAlpha)
 }
 
-ColorHelper.prototype.darken = darken
+colorPrototype.darken = darken
 
 declare module './color-helper' {
     interface ColorHelper {

@@ -1,31 +1,31 @@
 import { CSSColor } from 'typestyle/lib/types' 
-import { ColorHelper, color, convert } from './color-helper'
-import { RGB, R, G, B, A } from './constants'
+import { ColorHelper, color, convert, createColor, colorPrototype } from './color-helper'
+import { RGB } from './constants'
 
 export function mix(this: ColorHelper, mixin: CSSColor | ColorHelper, weight?: number): ColorHelper {
-    const color1 = this
+    const original = this
     const color2 = color(mixin)
-    const c1 = color1.toRGB().channels
-    const c2 = color2.toRGB().channels
+    const source = original.toRGB()
+    const dest = color2.toRGB()
     const p = weight === undefined ? 0.5 : weight
     const w = 2 * p - 1
-    const a = Math.abs(c1[A] - c2[A])
+    const a = Math.abs(source.a - dest.a)
     const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2.0
     const w2 = 1 - w1
 
-    const helper = new ColorHelper(
+    const helper = createColor(
         RGB,
-        Math.round(c1[R] * w1 + c2[R] * w2),
-        Math.round(c1[G] * w1 + c2[G] * w2),
-        Math.round(c1[B] * w1 + c2[B] * w2),
-        c1[A] * p + c2[A] * (1 - p),
-        color1.isAlpha || color2.isAlpha
+        Math.round(source.c1 * w1 + dest.c1 * w2),
+        Math.round(source.c2 * w1 + dest.c2 * w2),
+        Math.round(source.c3 * w1 + dest.c3 * w2),
+        source.a * p + dest.a * (1 - p),
+        original.isAlpha || color2.isAlpha
     )
 
-    return convert(helper, this.type, this.isAlpha)
+    return convert(helper, original.s, original.isAlpha || color2.isAlpha)
 }
 
-ColorHelper.prototype.mix = mix
+colorPrototype.mix = mix
 
 declare module './color-helper' {
     interface ColorHelper {

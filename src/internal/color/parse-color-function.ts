@@ -1,7 +1,6 @@
 import { RGB, HSL } from './constants'
-import { ColorHelper } from './color-helper'
+import { ColorHelper, colorParsers, createColor } from './color-helper'
 import { ensurePercent, parseCSSFunction } from '../../utils/formatting'
-import { parsers } from './color-helper'
 
 /**
  * 
@@ -34,8 +33,8 @@ export function parseColorFunction(colorString: string): ColorHelper | undefined
     const c2 = isRGB || isRGBA ? parseFloat(cssParts[3]) : ensurePercent(cssParts[3]);
     const c3 = hasAlpha ? parseFloat(cssParts[4]) : 1;
   
-    return new ColorHelper(type, c0, c1, c2, c3, hasAlpha);
+    return createColor(type, c0, c1, c2, c3, hasAlpha);
   }
   
   // add to parsers
-  parsers.push(parseColorFunction)
+  colorParsers.push(parseColorFunction)

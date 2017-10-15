@@ -1,16 +1,14 @@
-import { ColorHelper } from './color-helper'
-import { A, RGB, R, G, B } from './constants'
-import { clampColor } from './clamp-color'
+import { ColorHelper, colorPrototype, createColor } from './color-helper'
 import { ensurePercent } from '../../utils/formatting' 
 
 export function fadeOut(this: ColorHelper, percent: string | number, relative?: boolean): ColorHelper {
-    const v = this.channels
+    const v = this
     const max = 1
-    const a = clampColor(RGB, A, v[A] - (relative ? v[A] : max) * ensurePercent(percent))
-    return new ColorHelper(this.type, v[R], v[G], v[B], a, true)
+    const a = v.a - (relative ? v.a : max) * ensurePercent(percent)
+    return createColor(v.s, v.c1, v.c2, v.c3, a, true)
 }
 
-ColorHelper.prototype.fadeOut = fadeOut
+colorPrototype.fadeOut = fadeOut
 
 declare module './color-helper' {
     interface ColorHelper {

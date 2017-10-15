@@ -1,4 +1,4 @@
-import { ColorHelper, parsers } from './color-helper'
+import { ColorHelper, colorParsers, createColor } from './color-helper'
 import { RGB } from './constants' 
 
 /**
@@ -17,8 +17,8 @@ export function parseHexCode(stringValue: string): ColorHelper | undefined {
     const b = (hexColor >> 8) & 0xff
     const g = hexColor & 0xff
 
-    return new ColorHelper(RGB, r, b, g, 1, false)
+    return createColor(RGB, r, b, g, 1, false)
 }
 
 // add to parsers
-parsers.push(parseHexCode)
+colorParsers.push(parseHexCode)

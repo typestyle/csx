@@ -1,16 +1,17 @@
-import { ColorHelper, convert } from './color-helper'
-import { RGB, R, G, B, A } from './constants'
+import { ColorHelper, convert, createColor, colorPrototype } from './color-helper'
+import { RGB } from './constants'
 
 export function invert(this: ColorHelper): ColorHelper {
-    const v = this.toRGB().channels
+    const current = this
+    const v = current.toRGB()
     return convert(
-        new ColorHelper(RGB, 255 - v[R], 255 - v[G], 255 - v[B], v[A], this.isAlpha),
-        this.type,
-        this.isAlpha
+        createColor(RGB, 255 - v.c1, 255 - v.c2, 255 - v.c3, current.a, current.isAlpha),
+        current.s,
+        current.isAlpha
     )
 }
 
-ColorHelper.prototype.invert = invert
+colorPrototype.invert = invert
 
 declare module './color-helper' {
     interface ColorHelper {

@@ -1,5 +1,5 @@
-import { ColorHelper } from './color-helper'
-import { maxChannelValues, S, HSL, H, L, A } from './constants'
+import { ColorHelper, colorPrototype, createColor, convert } from './color-helper'
+import { maxChannelValues, S, HSL } from './constants'
 import { ensurePercent } from '../../utils/formatting'
 
 /**
@@ -9,13 +9,14 @@ import { ensurePercent } from '../../utils/formatting'
  * @param relative 
  */
 export function desaturate(this: ColorHelper, percent: string | number, relative?: boolean): ColorHelper {
-    const v = this.toHSL().channels
+    const original = this
+    const v = original.toHSL()
     const max = maxChannelValues[HSL][S]
-    const s = v[S] - (relative ? v[S] : max) * ensurePercent(percent)
-    return new ColorHelper(HSL, v[H], s, v[L], v[A], this.isAlpha)
+    const s = v.c2 - (relative ? v.c2 : max) * ensurePercent(percent)
+    return convert(createColor(HSL, v.c1, s, v.c3, original.a, original.isAlpha), original.s, original.isAlpha);
 }
 
-ColorHelper.prototype.desaturate = desaturate
+colorPrototype.desaturate = desaturate
 
 declare module './color-helper' {
     interface ColorHelper {

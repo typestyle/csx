@@ -1,23 +1,38 @@
 
-export { ColorHelper, color, convert } from './color-helper'
-export { darken  } from './darken'
-export { desaturate } from './desaturate'
-export { fadeIn } from './fade-in'
-export { fadeOut } from './fade-out'
-export { fade } from './fade'
-export { grayscale } from './grayscale'
+// core imports
+export { ColorHelper, color } from './color-helper'
+
+// formatters
+import './to-string'
+import './to-hex-string'
+
+// ColorHelper optional functions
+import './darken'
+import './desaturate'
+import './fade-in'
+import './fade-out'
+import './fade' 
+import './grayscale' 
+import './invert'
+import './lighten'
+import './mix'
+import './saturate'
+import './shade'
+import './spin'
+import './tint'
+
+// parsers
+import './parse-color-function'
+import './parse-hex-code'
+
+// parse-named-color requires ALL named colors, increasing build size significantly
+import './parse-named-color'
+
+// export color creators
 export { hsl } from './hsl'
 export { hsla } from './hsla'
-export { invert } from './invert'
-export { lighten } from './lighten'
-export { mix } from './mix'
-export { parseColorFunction } from './parse-color-function'
-export { parseHexCode } from './parse-hex-code'
-export { parseNamedColor } from './parse-named-color'
 export { rgb } from './rgb'
 export { rgba } from './rgba'
-export { saturate } from './saturate'
-export { shade } from './shade'
-export { tint } from './tint'
 
+// color keywords
 export * from './names'

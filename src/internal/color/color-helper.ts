@@ -1,147 +1,79 @@
-import { CSSColor } from 'typestyle/lib/types'
+import { HSL, RGB, maxChannelValues, A, H, S, L, R, G, B } from './constants'
 
-import { formatPercent, cssFunction, formatFloat, roundFloat, toHex } from '../../utils'
-import { HSL, RGB, R, G, B, H, S, L, A } from './constants'
-import { clampColor } from './clamp-color'
-import { red } from './names'
-
-export class ColorHelper {
-    public isAlpha: boolean
-    public channels: number[]
-    public type: number
-
-    constructor(format: number, c0: number, c1: number, c2: number, c3: number, hasAlpha: boolean) {
-        this.type = format
-        this.isAlpha = hasAlpha
-        this.channels = [
-            clampColor(format, 0, c0),
-            clampColor(format, 1, c1),
-            clampColor(format, 2, c2),
-            clampColor(format, 3, c3)
-        ]
-    }
-
+export interface ColorHelper {
+    type: 'color'
     /**
-    * Converts to hex; rgb(255, 255, 255) to #FFFFFF
-    */
-    public toHexString(): CSSColor {
-        const v = this.toRGB().channels
-        return '#' + (toHex(v[R]) + toHex(v[G]) + toHex(v[B])).toUpperCase()
-    }
-
-    /**
-     * Converts the stored color into string form (which is used by Free Style)
+     * True if the color has an alpha channel
      */
-    public toString(): CSSColor {
-        const format = this.type
-        const v = this.channels
-        const hasAlpha = this.isAlpha
-
-        let fnName: string
-        let params: (number | string)[]
-
-        // find function name and resolve first three channels
-        if (format === RGB) {
-            fnName = hasAlpha ? 'rgba' : 'rgb'
-            params = [Math.round(v[R]), Math.round(v[G]), Math.round(v[B])]
-        } else if (format === HSL) {
-            fnName = hasAlpha ? 'hsla' : 'hsl'
-            params = [Math.round(v[H]), formatPercent(roundFloat(v[S], 100)), formatPercent(roundFloat(v[L], 100))]
-        } else {
-            throw new Error('Invalid color format')
-        }
-
-        // add alpha channel if needed
-        if (hasAlpha) {
-            params.push(formatFloat(roundFloat(v[A], 100000)))
-        }
-
-        // return as a string
-        return cssFunction(fnName, params)
-    }
-
+    isAlpha: boolean
+    /**
+     * Color Space (HSL or RGB)
+     */
+    s: number
+    /**
+     * Channel 1 (Hue or Red)
+     */
+    c1: number
+    /**
+     * Channel 2 (Saturation or Green)
+     */
+    c2: number
+    /**
+     * Channel 3 (Lightness or Blue)
+     */
+    c3: number
+    /**
+     * Alpha
+     */
+    a: number
     /**
      * Converts to the Hue, Saturation, Lightness color space
      */
-    public toHSL() {
-        return convert(this, HSL, false)
-    }
-
+    toHSL(): ColorHelper
     /**
      * Converts to the Hue, Saturation, Lightness color space and adds an alpha channel
      */
-    public toHSLA() {
-        return convert(this, HSL, true)
-    }
-
+    toHSLA(): ColorHelper
     /**
      * Converts to the Red, Green, Blue color space
      */
-    public toRGB() {
-        return convert(this, RGB, false)
-    }
-
+    toRGB(): ColorHelper
     /**
      * Converts to the Red, Green, Blue color space and adds an alpha channel
      */
-    public toRGBA() {
-        return convert(this, RGB, true)
-    }
-
+    toRGBA(): ColorHelper
     /**
      * Returns the current level of red
      */
-    public red(): number {
-        return this.toRGB().channels[R]
-    }
-
+    red(): number
     /**
      * Returns the current level of green
      */
-    public green(): number {
-        return this.toRGB().channels[G]
-    }
-
+    green(): number
     /**
      * Returns the current level of blue
      */
-    public blue(): number {
-        return this.toRGB().channels[B]
-    }
-
+    blue(): number
     /**
      * Returns the current hue
      */
-    public hue(): number {
-        return this.toHSL().channels[H]
-    }
-
+    hue(): number
     /**
      * Returns the saturation
      */
-    public saturation(): number {
-        return this.toHSL().channels[S]
-    }
-
+    saturation(): number
     /**
      * Returns the current lightness
      */
-    public lightness(): number {
-        return this.toHSL().channels[L]
-    }
+    lightness(): number
     /**
      * Returns the current value of the alpha channel
      */
-    public alpha(): number {
-        return this.channels[A]
-    }
-
+    alpha(): number
     /**
      * Returns the current value of the alpha channel
      */
-    public opacity(): number {
-        return this.channels[A]
-    }
+    opacity(): number
 }
 
 /**
@@ -149,58 +81,131 @@ export class ColorHelper {
  * quickly map to the right converter. 1-2 and 2-1 yield different results, so this
  * allows us to choose the right converter observing the direction correcly
  */
-const converters = {
+const colorConverters = {
     [RGB - HSL]: RGBtoHSL,
     [HSL - RGB]: HSLtoRGB
 }
 
-export const parsers: { (colorString: string): ColorHelper | undefined }[] = [];
+export const colorParsers: { (colorString: string): ColorHelper | undefined }[] = []
+
+export const colorPrototype = {
+    type: 'color',
+    isAlpha: false,
+    s: 0,
+    c1: 0,
+    c2: 0,
+    c3: 0,
+    a: 0,
+    toHSL() {
+        return convert(this, HSL, false)
+    },
+    toHSLA() {
+        return convert(this, HSL, true)
+    },
+    toRGB() {
+        return convert(this, RGB, false)
+    },
+    toRGBA() {
+        return convert(this, RGB, true)
+    },
+    red(): number {
+        return this.toRGB().c1
+    },
+    green(): number {
+        return this.toRGB().c2
+    },
+    blue(): number {
+        return this.toRGB().c3
+    },
+    hue(): number {
+        return this.toHSL().c1
+    },
+    saturation(): number {
+        return this.toHSL().c2
+    },
+    lightness(): number {
+        return this.toHSL().c3
+    },
+    alpha(): number {
+        return this.a
+    },
+    opacity(): number {
+        return this.a
+    }
+} as ColorHelper
 
 /**
  * Creates a color from a hex color code or named color.
  * e.g. color('red') or color('#FF0000') or color('#F00'))
  */
 export function color(value: string | ColorHelper): ColorHelper {
-    if (value instanceof ColorHelper) {
+    if ((value as ColorHelper).type === 'color') {
         return value as ColorHelper
     }
-    
-    let colorHelper: ColorHelper | undefined;
-    for (let i = 0, ilen = parsers.length; i < ilen; i++) {
-        colorHelper = parsers[i](value);
-        if (colorHelper) {
-            return colorHelper;
+
+    let result: ColorHelper | undefined
+    for (let i = 0, ilen = colorParsers.length; i < ilen; i++) {
+        result = colorParsers[i](value as string)
+        if (result) {
+            return result
         }
     }
+
+    return createColor(RGB, 255, 0, 0, 1, false)
+}
+
+export function createColor(format: number, c1: number, c2: number, c3: number, a: number, hasAlpha: boolean) {
+    let max1, max2, max3
+    if (format === HSL) {
+        max1 = H;
+        max2 = S;
+        max3 = L;
+    } else {
+        max1 = R;
+        max2 = G;
+        max3 = B;
+    }
     
-    return red!
+    const self = Object.create(colorPrototype) as ColorHelper
+    self.s = format
+    self.isAlpha = hasAlpha
+    self.c1 = clampColor(format, 0, c1)
+    self.c2 = clampColor(format, 0, c2)
+    self.c3 = clampColor(format, 0, c3)
+    self.a = clampColor(format, A, a)
+    return self
 }
 
 /**
  * Converts from one format to another format
  */
-export function convert(self: ColorHelper, toType: number, hasAlpha: boolean): ColorHelper {
-    const type = self.type
-    const v = self.channels 
-    
+export function convert(original: ColorHelper, toType: number, hasAlpha: boolean): ColorHelper {
+    const type = original.s
+
     if (type !== toType) {
         // if types are not the same convert
-        return converters[type - toType](v[R], v[G], v[B], v[A], hasAlpha)
+        return colorConverters[type - toType](original, hasAlpha)
     }
-    if (hasAlpha !== self.isAlpha) {
+    if (hasAlpha !== original.isAlpha) {
         // if types are same but alpha is not, create a new color
-        return new ColorHelper(type, v[R], v[G], v[B], v[A], hasAlpha)
+        return createColor(type, original.c1, original.c2, original.c3, original.a, hasAlpha)
     }
-    
+
     // else return the same instance, nothing has changed
-    return self
+    return original
 }
 
+export function clampColor(format: number, channel: number, value: number): number {
+    const val = value || 0
+    const min = 0
+    const max = maxChannelValues[format][channel]
+    return val < min ? min : val > max ? max : val
+}
 
-function RGBtoHSL(c0: number, c1: number, c2: number, c3: number, hasAlpha: boolean): ColorHelper {
-    const r = c0 / 255
-    const g = c1 / 255
-    const b = c2 / 255
+function RGBtoHSL(i: ColorHelper, hasAlpha: boolean): ColorHelper {
+    const r = i.c1 / 255
+    const g = i.c2 / 255
+    const b = i.c3 / 255
     const min = Math.min(r, g, b)
     const max = Math.max(r, g, b)
     const l = (min + max) / 2
@@ -234,17 +239,17 @@ function RGBtoHSL(c0: number, c1: number, c2: number, c3: number, hasAlpha: bool
         s = delta / (2 - max - min)
     }
 
-    return new ColorHelper(HSL, h, s, l, c3, hasAlpha)
+    return createColor(HSL, h, s, l, i.a, hasAlpha)
 }
 
-function HSLtoRGB(c0: number, c1: number, c2: number, c3: number, hasAlpha: boolean): ColorHelper {
-    const h = c0 / 360
-    const s = c1
-    const l = c2
+function HSLtoRGB(i: ColorHelper, hasAlpha: boolean): ColorHelper {
+    const h = i.c1 / 360
+    const s = i.c2
+    const l = i.c3
 
     if (s === 0) {
         const val = l * 255
-        return new ColorHelper(RGB, val, val, val, c3, hasAlpha)
+        return createColor(RGB, val, val, val, i.a, hasAlpha)
     }
 
     const t2 = l < 0.5 ? l * (1 + s) : l + s - l * s
@@ -284,5 +289,5 @@ function HSLtoRGB(c0: number, c1: number, c2: number, c3: number, hasAlpha: bool
         }
     }
 
-    return new ColorHelper(RGB, r, g, b, c3, hasAlpha)
+    return createColor(RGB, r, g, b, i.a, hasAlpha)
 }
