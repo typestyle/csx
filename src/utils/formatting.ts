@@ -50,3 +50,9 @@ export function cssFunction(functionName: string, params: List<string|number>): 
   const parts = Array.prototype.join.call(params, ',');
   return `${functionName}(${parts})`;
 }
+
+export function createFunction<T>(name: string) {
+  return (function() {
+      return cssFunction(name, arguments);
+  }) as any as T;
+}
