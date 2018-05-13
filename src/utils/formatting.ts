@@ -5,10 +5,12 @@ const floatExpression = /^(\-?\d+\.?\d{0,5})/;
 
 export const formatUnit = <T>(unit: string) => (val: number) => (val + unit) as any as T;
 
+export const toFloat = parseFloat;
+
 export function ensurePercent(value: string | number): number {
   return typeof value === 'number'
     ? value as number
-    : parseFloat(value) * .01;
+    : toFloat(value) * .01;
 }
 
 export function formatPercent(value: number): string {

@@ -9,7 +9,8 @@
   "types": "./lib/index",
   "scripts": {
     "start": "npm run build -- -w & npm run unittest -- --watch",
-    "build": "tsc -p . && tsc -p tsconfig.es2015.json && webpack",
+    "build": "tsc -p . && tsc -p tsconfig.es2015.json && npm run build:umd",
+    "build:umd": "ts-node scripts/rollup.ts",
     "clean": "node_modules/.bin/del-cli -f lib lib.es2015 umd",
     "prebuild": "npm run clean",
     "unittest": "mocha ./lib/tests/**/*.js",
@@ -38,15 +39,15 @@
     "typestyle": "*"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^7.0.27",
+    "@types/mocha": "^5.2.0",
+    "@types/node": "^10.0.8",
     "del-cli": "^1.1.0",
-    "mocha": "^3.4.2",
-    "ts-loader": "^2.1.0",
-    "ts-node": "^3.0.4",
-    "typescript": "^2.3.4",
-    "typestyle": "^1.3.2",
-    "uglify-loader": "^2.0.0",
-    "webpack": "^2.6.1"
+    "mocha": "^5.1.1",
+    "rollup": "^0.58.2",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-uglify": "^3.0.0",
+    "ts-node": "^6.0.3",
+    "typescript": "^2.8.3",
+    "typestyle": "^1.7.2"
   }
 }

@@ -1,6 +1,7 @@
 import { CSSImage, CSSPosition, CSSLength, CSSPercentage, CSSRepeatStyle, CSSBox, CSSColor } from 'typestyle/lib/types';
 import { map } from '../utils';
 import { List } from '../types';
+import { isDefined, isNotEmpty } from '../utils/inspect';
 
 export type CsxBackground = {
     image?: CSSImage;
@@ -9,7 +10,7 @@ export type CsxBackground = {
     repeat?: CSSRepeatStyle;
     origin?: CSSBox;
     clip?: 'border-box' | 'padding-box' | 'content-box' | 'text';
-    attachment?: 'scroll' | 'fixed' | 'local'
+    attachment?: 'scroll' | 'fixed' | 'local';
     color?: CSSColor;
 };
 
@@ -20,33 +21,19 @@ export type CsxBackground = {
 export function background(...backgrounds: CsxBackground[]): string;
 export function background(): string {
     return map(arguments as List<CsxBackground>, (background: CsxBackground) => {
-        let s = '';
-        if (background.image) {
-            s += ` ${background.image}`;
-        }
-        if (background.position) {
-            s += ` ${background.position}`;
-        }
-        if (background.size || background.size === 0) {
-            s += ` ${background.size}`;
-        }
-        if (background.repeat) {
-            s += ` ${background.repeat}`;
-        }
-        if (background.origin) {
-            s += ` ${background.origin}`;
-        }
-        if (background.clip) {
-            s += ` ${background.clip}`;
-        }
-        if (background.attachment) {
-            s += ` ${background.attachment}`;
-        }
-        if (background.color) {
-            s += ` ${background.color}`;
-        }
-        return s.trim();
+        return [
+            background.image,
+            background.position,
+            background.size,
+            background.repeat,
+            background.origin,
+            background.clip,
+            background.attachment,
+            background.color
+        ]
+            .filter(isDefined)
+            .join(' ');
     })
-    .filter(s => s !== '')
-    .join(',');
+        .filter(isNotEmpty)
+        .join(',');
 }

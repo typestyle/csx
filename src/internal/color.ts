@@ -1,5 +1,5 @@
 import { CSSColor, CSSNamedColor } from 'typestyle/lib/types';
-import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, roundFloat } from '../utils';
+import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, roundFloat, toFloat } from '../utils';
 import { StringType } from '../types';
 
 const isTypeArraySupported = typeof Float32Array !== 'undefined';
@@ -71,9 +71,9 @@ export function rgba(red: number, blue: number, green: number, alpha: string | n
 }
 
 function convertHelper(toFormat: number, helper: ColorHelper | any, forceAlpha?: boolean): ColorHelper {
-    const fromFormat = helper._format;
-    const v = helper._values;
-    const a = forceAlpha === undefined ? helper._hasAlpha : forceAlpha;
+    const fromFormat = helper.f;
+    const v = helper.c;
+    const a = forceAlpha === undefined ? helper.a : forceAlpha;
     if (fromFormat !== toFormat) {
         return converters[fromFormat - toFormat](v[R], v[G], v[B], v[A], a);
     }
@@ -84,17 +84,26 @@ function convertHelper(toFormat: number, helper: ColorHelper | any, forceAlpha?:
  * A CSS Color.  Includes utilities for converting between color types
  */
 export class ColorHelper implements StringType<CSSColor> {
-    /** @private */
-    private _hasAlpha: boolean;
-    /** @private */
-    private _values: number[];
-    /** @private */
-    private _format: number;
+    /** 
+     * True if the color should output the alpha channel
+     * @private 
+     */
+    private a: boolean;
+    /** 
+     * Color channels
+     * @private 
+     */
+    private c: number[];
+    /** 
+     * Format of the color RGB = 0, HSL = 1
+     * @private 
+     */
+    private f: number;
 
     constructor(format: number, c0: number, c1: number, c2: number, c3: number, hasAlpha: boolean) {
-        this._format = format;
-        this._hasAlpha = hasAlpha;
-        this._values = colorArray(
+        this.f = format;
+        this.a = hasAlpha;
+        this.c = colorArray(
             clampColor(format as ColorFormat, 0, c0),
             clampColor(format as ColorFormat, 1, c1),
             clampColor(format as ColorFormat, 2, c2),
@@ -106,9 +115,9 @@ export class ColorHelper implements StringType<CSSColor> {
      * Converts the stored color into string form (which is used by Free Style)
      */
     public toString(): CSSColor {
-        const format = this._format;
-        const v = this._values;
-        const hasAlpha = this._hasAlpha;
+        const format = this.f;
+        const v = this.c;
+        const hasAlpha = this.a;
 
         let fnName: string;
         let params: (number | string)[];
@@ -137,7 +146,7 @@ export class ColorHelper implements StringType<CSSColor> {
      * Converts to hex rgb(255, 255, 255) to #FFFFFF
      */
     public toHexString(): string {
-        const v = convertHelper(RGB, this)._values;
+        const v = convertHelper(RGB, this).c;
         return '#' + (toHex(v[R]) + toHex(v[G]) + toHex(v[B])).toUpperCase();
     }
 
@@ -170,31 +179,31 @@ export class ColorHelper implements StringType<CSSColor> {
     }
 
     public red(): number {
-        return (this._format === RGB ? this : this.toRGB())._values[0];
+        return (this.f === RGB ? this : this.toRGB()).c[0];
     }
 
     public green(): number {
-        return (this._format === RGB ? this : this.toRGB())._values[1];
+        return (this.f === RGB ? this : this.toRGB()).c[1];
     }
 
     public blue(): number {
-        return (this._format === RGB ? this : this.toRGB())._values[2];
+        return (this.f === RGB ? this : this.toRGB()).c[2];
     }
 
     public hue(): number {
-        return (this._format === HSL ? this : this.toHSL())._values[0];
+        return (this.f === HSL ? this : this.toHSL()).c[0];
     }
 
     public saturation(): number {
-        return (this._format === HSL ? this : this.toHSL())._values[1];
+        return (this.f === HSL ? this : this.toHSL()).c[1];
     }
 
     public lightness(): number {
-        return (this._format === HSL ? this : this.toHSL())._values[2];
+        return (this.f === HSL ? this : this.toHSL()).c[2];
     }
 
     public alpha(): number {
-        return this._values[A];
+        return this.c[A];
     }
 
     public opacity(): number {
@@ -202,35 +211,35 @@ export class ColorHelper implements StringType<CSSColor> {
     }
 
     public invert(): ColorHelper {
-        const v = convertHelper(RGB, this)._values;
-        return convertHelper(this._format, new ColorHelper(RGB, 255 - v[R], 255 - v[G], 255 - v[B], this._values[A], this._hasAlpha));
+        const v = convertHelper(RGB, this).c;
+        return convertHelper(this.f, new ColorHelper(RGB, 255 - v[R], 255 - v[G], 255 - v[B], this.c[A], this.a));
     }
 
     public lighten(percent: string | number, relative?: boolean): ColorHelper {
-        const v = convertHelper(HSL, this)._values;
+        const v = convertHelper(HSL, this).c;
         const max = maxChannelValues[HSL][L];
         const l = v[L] + (relative ? max - v[L] : max) * ensurePercent(percent);
-        return convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
+        return convertHelper(this.f, new ColorHelper(HSL, v[H], v[S], l, this.c[A], this.a));
     }
 
     public darken(percent: string | number, relative?: boolean): ColorHelper {
-        const v = convertHelper(HSL, this)._values;
+        const v = convertHelper(HSL, this).c;
         const l = v[L] - (relative ? v[L] : maxChannelValues[HSL][L]) * ensurePercent(percent);
-        return convertHelper(this._format, new ColorHelper(HSL, v[H], v[S], l, this._values[A], this._hasAlpha));
+        return convertHelper(this.f, new ColorHelper(HSL, v[H], v[S], l, this.c[A], this.a));
     }
 
     public saturate(percent: string | number, relative?: boolean): ColorHelper {
-        const v = convertHelper(HSL, this)._values;
+        const v = convertHelper(HSL, this).c;
         const max = maxChannelValues[HSL][S];
         const s = v[S] + (relative ? max - v[S] : max) * ensurePercent(percent);
-        return convertHelper(this._format, new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha));
+        return convertHelper(this.f, new ColorHelper(HSL, v[H], s, v[L], this.c[A], this.a));
     }
 
     public desaturate(percent: string | number, relative?: boolean): ColorHelper {
-        const v = convertHelper(HSL, this)._values;
+        const v = convertHelper(HSL, this).c;
         const max = maxChannelValues[HSL][S];
         const s = v[S] - (relative ? v[S] : max) * ensurePercent(percent);
-        return convertHelper(this._format, new ColorHelper(HSL, v[H], s, v[L], this._values[A], this._hasAlpha));
+        return convertHelper(this.f, new ColorHelper(HSL, v[H], s, v[L], this.c[A], this.a));
     }
 
     public grayscale() {
@@ -238,30 +247,30 @@ export class ColorHelper implements StringType<CSSColor> {
     }
 
     public fade(percent: string | number): ColorHelper {
-        const v = this._values;
+        const v = this.c;
         const a = clampColor(RGB, A, ensurePercent(percent));
-        return convertHelper(this._format, new ColorHelper(this._format, v[R], v[G], v[B], a, true));
+        return convertHelper(this.f, new ColorHelper(this.f, v[R], v[G], v[B], a, true));
     }
 
     public fadeOut(percent: string | number, relative?: boolean): ColorHelper {
-        const v = this._values;
+        const v = this.c;
         const max = 1;
         const a = clampColor(RGB, A, v[A] - (relative ? v[A] : max) * ensurePercent(percent));
-        return convertHelper(this._format, new ColorHelper(this._format, v[R], v[G], v[B], a, true));
+        return convertHelper(this.f, new ColorHelper(this.f, v[R], v[G], v[B], a, true));
     }
 
     public fadeIn(percent: string | number, relative?: boolean): ColorHelper {
-        const v = this._values;
+        const v = this.c;
         const max = 1;
         const a = clampColor(RGB, A, v[A] + (relative ? v[A] : max) * ensurePercent(percent));
-        return convertHelper(this._format, new ColorHelper(this._format, v[R], v[G], v[B], a, true));
+        return convertHelper(this.f, new ColorHelper(this.f, v[R], v[G], v[B], a, true));
     }
 
     public mix(mixin: CSSColor | ColorHelper, weight?: number): ColorHelper {
         const color1 = this;
         const color2 = ensureColor(mixin);
-        const c1 = convertHelper(RGB, color1)._values;
-        const c2 = convertHelper(RGB, color2)._values;
+        const c1 = convertHelper(RGB, color1).c;
+        const c2 = convertHelper(RGB, color2).c;
         const p = weight === undefined ? 0.5 : weight;
         const w = 2 * p - 1;
         const a = Math.abs(c1[A] - c2[A]);
@@ -274,10 +283,10 @@ export class ColorHelper implements StringType<CSSColor> {
             Math.round(c1[G] * w1 + c2[G] * w2),
             Math.round(c1[B] * w1 + c2[B] * w2),
             c1[A] * p + c2[A] * (1 - p),
-            color1._hasAlpha || color2._hasAlpha
+            color1.a || color2.a
         );
 
-        return convertHelper(this._format, helper);
+        return convertHelper(this.f, helper);
     }
 
     public tint(weight: number): ColorHelper {
@@ -289,8 +298,8 @@ export class ColorHelper implements StringType<CSSColor> {
     }
 
     public spin(degrees: number): ColorHelper {
-        const v = convertHelper(HSL, this)._values;
-        return convertHelper(this._format, new ColorHelper(HSL, modDegrees(v[H] + degrees), v[S], v[L], this._values[A], this._hasAlpha));
+        const v = convertHelper(HSL, this).c;
+        return convertHelper(this.f, new ColorHelper(HSL, modDegrees(v[H] + degrees), v[S], v[L], this.c[A], this.a));
     }
 }
 
@@ -453,10 +462,10 @@ function parseColorFunction(colorString: string): ColorHelper | undefined {
         throw new Error('unsupported color string');
     }
 
-    const c0 = parseFloat(cssParts[1]);
-    const c1 = isRGB || isRGBA ? parseFloat(cssParts[2]) : ensurePercent(cssParts[2]);
-    const c2 = isRGB || isRGBA ? parseFloat(cssParts[3]) : ensurePercent(cssParts[3]);
-    const c3 = hasAlpha ? parseFloat(cssParts[4]) : 1;
+    const c0 = toFloat(cssParts[1]);
+    const c1 = isRGB || isRGBA ? toFloat(cssParts[2]) : ensurePercent(cssParts[2]);
+    const c2 = isRGB || isRGBA ? toFloat(cssParts[3]) : ensurePercent(cssParts[3]);
+    const c3 = hasAlpha ? toFloat(cssParts[4]) : 1;
 
     return new ColorHelper(type, c0, c1, c2, c3, hasAlpha);
 }
