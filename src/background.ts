@@ -1,7 +1,7 @@
 import { CSSImage, CSSPosition, CSSLength, CSSPercentage, CSSRepeatStyle, CSSBox, CSSColor } from 'typestyle/lib/types';
-import { map } from '../utils';
-import { List } from '../types';
-import { isDefined, isNotEmpty } from '../utils/inspect';
+import { List } from './types';
+import { isDefined, isNotEmpty } from './utils/inspect';
+import { map } from './utils/arrays';
 
 export type CsxBackground = {
     image?: CSSImage;

@@ -8,16 +8,26 @@
   "typings": "./lib/index",
   "types": "./lib/index",
   "scripts": {
-    "start": "npm run build -- -w & npm run unittest -- --watch",
+    "start": "npm run build -- -w & npm run test:watch",
     "build": "tsc -p . && tsc -p tsconfig.es2015.json && npm run build:umd",
     "build:umd": "ts-node scripts/rollup.ts",
     "clean": "node_modules/.bin/del-cli -f lib lib.es2015 umd",
     "prebuild": "npm run clean",
-    "unittest": "mocha ./lib/tests/**/*.js",
-    "test": "npm run build && npm run unittest",
+    "test": "jest",
+    "test:watch": "jest && jest --watchAll",
     "preversion": "npm run build",
     "postversion": "git push --follow-tags && npm publish",
     "u": "npm install typestyle@latest --save-exact --save-dev"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "tests/.*\\.ts$"
   },
   "repository": {
     "type": "git",
@@ -39,13 +49,14 @@
     "typestyle": "*"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.0",
+    "@types/jest": "^22.2.3",
     "@types/node": "^10.0.8",
     "del-cli": "^1.1.0",
-    "mocha": "^5.1.1",
+    "jest": "^22.4.3",
     "rollup": "^0.58.2",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^3.0.0",
+    "ts-jest": "^22.4.6",
     "ts-node": "^6.0.3",
     "typescript": "^2.8.3",
     "typestyle": "^1.7.2"

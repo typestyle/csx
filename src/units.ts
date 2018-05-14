@@ -1,4 +1,4 @@
-import { formatUnit } from '../utils';
+import { formatUnit } from './utils';
 import { CSSAngle, CSSLength, CSSPercentage } from 'typestyle/lib/types';
 
 /**

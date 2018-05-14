@@ -1,6 +1,6 @@
-import { ensureLength } from '../utils';
+import { ensureLength } from './utils';
 import { CSSColor, CSSLength, CSSLineStyle } from 'typestyle/lib/types';
-import { BoxFunction, BorderOptions } from '../types';
+import { BoxFunction, BorderOptions } from './types';
 import { params } from './lists'; 
 
 /**

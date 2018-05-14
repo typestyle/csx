@@ -1,6 +1,6 @@
 import { CSSColor, CSSNamedColor } from 'typestyle/lib/types';
-import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, roundFloat, toFloat, round } from '../utils';
-import { StringType } from '../types';
+import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, roundFloat, toFloat, round } from './utils';
+import { StringType } from './types';
 
 const RGB = 'rgb', HSL = 'hsl';
 

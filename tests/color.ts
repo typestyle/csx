@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { color, hsl, hsla, rgb, rgba } from '../index';
+import { color, hsl, hsla, rgb, rgba } from '../src/color';
 
 const cyan = rgb(0, 255, 255);
 const blue = rgb(0, 0, 255);

@@ -1,4 +1,4 @@
-import * as csx from '../index';
+import * as csx from '../src/border';
 import * as assert from 'assert';
 
 describe('border()', () => {

@@ -1,4 +1,6 @@
-import { calc, rgb, important, quote, url, px, viewWidth } from '../index';
+import { rgb } from '../src/color';
+import { calc, important, quote, url } from '../src/strings';
+import { px, viewWidth } from '../src/units';
 import * as assert from 'assert';
 
 describe("csx/important", () => {
