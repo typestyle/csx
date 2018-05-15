@@ -1,6 +1,31 @@
-import { CSSColor, CSSPercentage, CSSLength, CSSLineStyle } from 'typestyle/lib/types';
+import { WidthProperty, BorderBlockStartStyleProperty, BackgroundImageProperty, BackgroundPositionProperty, BackgroundSizeProperty, BackgroundRepeatProperty, BackgroundOriginProperty, BackgroundClipProperty, BackgroundAttachmentProperty, ColorProperty, BorderStyleProperty, BorderWidthProperty, Globals } from 'csstype';
 
-export type CsxColorStop = [CSSColor | StringType<CSSColor>, CSSPercentage | CSSLength];
+export type CSSAngle = WidthProperty<string | number>;
+export type CSSLength = WidthProperty<string | number>;
+export type CSSPercentage = WidthProperty<string | number>;
+export type CsxColorStop = [string | StringType<string>, CSSPercentage | CSSLength];
+export type CSSTransformFunction = string;
+export type CSSLineStyle = BorderBlockStartStyleProperty;
+
+export type CsxBackgroundOptions = {
+    image?: BackgroundImageProperty;
+    position?: BackgroundPositionProperty<CSSLength>;
+    size?: BackgroundSizeProperty<CSSLength>;
+    repeat?: BackgroundRepeatProperty;
+    origin?: BackgroundOriginProperty;
+    clip?: BackgroundClipProperty;
+    attachment?: BackgroundAttachmentProperty;
+    color?: ColorProperty;
+};
+
+export type CSSSideOrCorner = 'left' | 'right' | 'top' | 'bottom'
+  | 'to left' | 'to right' | 'to top' | 'to bottom'
+  | 'left top' | 'right top' | 'left bottom' | 'right bottom'
+  | 'top left' | 'top right' | 'bottom left' | 'bottom right'
+  | 'to left top' | 'to right top' | 'to left bottom' | 'to right bottom'
+  | 'to top left' | 'to top right' | 'to bottom left' | 'to bottom right';
+
+export type CSSGradient = Globals | string;
 
 export interface StringType<T extends string> {
     toString(): T;
@@ -12,9 +37,9 @@ export interface List<T> {
 }
 
 export interface BorderOptions {
-    color?: CSSColor,
-    style?: CSSLineStyle,
-    width?: CSSLength | 'thin' | 'medium' | 'thick'
+    color?: ColorProperty,
+    style?: BorderStyleProperty,
+    width?: BorderWidthProperty<CSSLength>
 }
 
 export interface BoxFunction<T> {

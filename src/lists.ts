@@ -1,5 +1,5 @@
 import { StringType } from './types';
-import { filter } from './utils'
+import { filter } from './utils/arrays'
 import { px } from "./units";
 
 const delimited = (delimiter: string) => {

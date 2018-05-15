@@ -1,6 +1,7 @@
-import { CSSColor, CSSNamedColor } from 'typestyle/lib/types';
-import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, roundFloat, toFloat, round } from './utils';
+import { ensurePercent, formatPercent, parseCSSFunction, cssFunction, formatFloat, toFloat } from './utils/formatting';
+import { roundFloat, round } from './utils/math';
 import { StringType } from './types';
+import { ColorProperty } from 'csstype';
 
 const RGB = 'rgb', HSL = 'hsl';
 
@@ -26,7 +27,7 @@ const maxChannelValues = {
  * Creates a color from a hex color code or named color.
  * e.g. color('red') or color('#FF0000') or color('#F00'))
  */
-export function color(value: CSSNamedColor | string): ColorHelper {
+export function color(value: ColorProperty): ColorHelper {
     return parseHexCode(value) || parseColorFunction(value) || rgb(255, 0, 0)!;
 }
 
@@ -70,7 +71,7 @@ function convertHelper(toFormat: 'rgb' | 'hsl', helper: ColorHelper | any, force
 /**
  * A CSS Color.  Includes utilities for converting between color types
  */
-export class ColorHelper implements StringType<CSSColor> {
+export class ColorHelper implements StringType<ColorProperty> {
     /**
      * Format of the color
      * @private
@@ -117,7 +118,7 @@ export class ColorHelper implements StringType<CSSColor> {
     /**
      * Converts the stored color into string form (which is used by Free Style)
      */
-    public toString(): CSSColor {
+    public toString(): ColorProperty {
         const { o: hasAlpha, f: format, r, g, b, a } = this;
 
         let fnName: string;
@@ -278,7 +279,7 @@ export class ColorHelper implements StringType<CSSColor> {
         return convertHelper(_.f, new ColorHelper(_.f, _.r, _.g, _.b, a, true));
     }
 
-    public mix(mixin: CSSColor | ColorHelper, weight?: number): ColorHelper {
+    public mix(mixin: string | ColorHelper, weight?: number): ColorHelper {
         const _ = this;
         const color2 = ensureColor(mixin);
         const g = convertHelper(RGB, _);
@@ -422,7 +423,7 @@ function clampColor(channel: keyof typeof maxChannelValues, value: number): numb
     return value < min ? min : value > max ? max : value;
 }
 
-function ensureColor(c: CSSColor | ColorHelper): ColorHelper {
+function ensureColor(c: string | ColorHelper): ColorHelper {
     return c instanceof ColorHelper ? (c as ColorHelper) : color(c as string);
 }
 

@@ -1,5 +1,5 @@
-import { formatUnit } from './utils';
-import { CSSAngle, CSSLength, CSSPercentage } from 'typestyle/lib/types';
+import { formatUnit } from './utils/formatting';
+import { CSSPercentage, CSSAngle, CSSLength } from './types';
 
 /**
  * Returns the number with a suffix of %
