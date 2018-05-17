@@ -1,4 +1,4 @@
-import { em, percent, px, rad, rem, turn, viewHeight, viewWidth } from '../index';
+import { em, percent, px, rad, rem, turn, viewHeight, viewWidth } from '../src/index';
 import * as assert from 'assert';
 
 describe("csx/em", () => {

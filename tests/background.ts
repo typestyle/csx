@@ -1,4 +1,4 @@
-import { background } from "../index";
+import { background } from "../src/background";
 import * as assert from 'assert';
 
 describe("csx/background", () => {

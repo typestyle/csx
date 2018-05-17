@@ -1,5 +1,3 @@
-import { CSSUrl } from 'typestyle/lib/types';
-
 /**
  * Returns the value with '' around it.  Any 's will be escaped \' in the output
  */
@@ -32,6 +30,6 @@ export function important<T extends string>(val: number | T): string {
  * Returns the string in a url()
  * @see https://developer.mozilla.org/en-US/docs/Web/CSS/url
  */
-export function url(val: string): CSSUrl {
+export function url(val: string): string {
   return `url(${val || ''})`;
 }

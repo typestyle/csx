@@ -5,10 +5,12 @@ const floatExpression = /^(\-?\d+\.?\d{0,5})/;
 
 export const formatUnit = <T>(unit: string) => (val: number) => (val + unit) as any as T;
 
+export const toFloat = parseFloat;
+
 export function ensurePercent(value: string | number): number {
   return typeof value === 'number'
     ? value as number
-    : parseFloat(value) * .01;
+    : toFloat(value) * .01;
 }
 
 export function formatPercent(value: number): string {
@@ -47,4 +49,10 @@ export function parseCSSFunction(stringValue: string): string[] | undefined {
 export function cssFunction(functionName: string, params: List<string|number>): string {
   const parts = Array.prototype.join.call(params, ',');
   return `${functionName}(${parts})`;
+}
+
+export function createFunction<T>(name: string) {
+  return (function() {
+      return cssFunction(name, arguments);
+  }) as any as T;
 }
