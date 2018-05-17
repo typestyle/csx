@@ -1,4 +1,4 @@
-import { WidthProperty, BorderBlockStartStyleProperty, BackgroundImageProperty, BackgroundPositionProperty, BackgroundSizeProperty, BackgroundRepeatProperty, BackgroundOriginProperty, BackgroundClipProperty, BackgroundAttachmentProperty, ColorProperty, BorderStyleProperty, BorderWidthProperty, Globals } from 'csstype';
+import { WidthProperty, BorderBlockStartStyleProperty, BackgroundImageProperty, BackgroundPositionProperty, BackgroundSizeProperty, BackgroundRepeatProperty, BackgroundOriginProperty, BackgroundClipProperty, BackgroundAttachmentProperty, BorderStyleProperty, BorderWidthProperty, Globals, BackgroundColorProperty, BorderColorProperty } from 'csstype';
 
 export type CSSAngle = WidthProperty<string | number>;
 export type CSSLength = WidthProperty<string | number>;
@@ -15,7 +15,7 @@ export type CsxBackgroundOptions = {
     origin?: BackgroundOriginProperty;
     clip?: BackgroundClipProperty;
     attachment?: BackgroundAttachmentProperty;
-    color?: ColorProperty;
+    color?: BackgroundColorProperty;
 };
 
 export type CSSSideOrCorner = 'left' | 'right' | 'top' | 'bottom'
@@ -37,7 +37,7 @@ export interface List<T> {
 }
 
 export interface BorderOptions {
-    color?: ColorProperty,
+    color?: BorderColorProperty,
     style?: BorderStyleProperty,
     width?: BorderWidthProperty<CSSLength>
 }
