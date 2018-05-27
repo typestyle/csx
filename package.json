@@ -48,10 +48,10 @@
         "@types/jest": "^22.2.3",
         "@types/node": "^10.0.8",
         "del-cli": "^1.1.0",
-        "jest": "^22.4.3",
-        "rollup": "^0.58.2",
+        "jest": "^23.0.1",
+        "rollup": "^0.59.3",
         "rollup-plugin-typescript": "^0.8.1",
-        "rollup-plugin-uglify": "^3.0.0",
+        "rollup-plugin-uglify": "^4.0.0",
         "ts-jest": "^22.4.6",
         "ts-node": "^6.0.3",
         "typescript": "^2.8.3"
