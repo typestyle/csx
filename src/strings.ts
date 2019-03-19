@@ -19,7 +19,7 @@ export function quote(val: number | string): string {
  */
 export function important<T>(val: T): T {
   if (!val && val !== 0) {
-    return '';
+    return '' as any as T;
   }
   return `${val.toString()} !important` as any as T;
 }
