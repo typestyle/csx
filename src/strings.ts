@@ -15,15 +15,13 @@ export function quote(val: number | string): string {
 
 /**
  * Returns the value with !important on the end.  If the value provided is a CSSHelper, it will
- * be converted to a string
+ * be converted to a string by necessity, but will look like it is the original type to TypeScript.
  */
-export function important(val: number): string;
-export function important<T extends string>(val: T): T;
-export function important<T extends string>(val: number | T): string {
+export function important<T>(val: T): T {
   if (!val && val !== 0) {
     return '';
   }
-  return `${val.toString()} !important`;
+  return `${val.toString()} !important` as any as T;
 }
 
 /**
