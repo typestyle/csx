@@ -50,7 +50,7 @@
         "del-cli": "^1.1.0",
         "jest": "^23.0.1",
         "rollup": "^0.67.0",
-        "rollup-plugin-typescript": "^0.8.1",
+        "rollup-plugin-typescript": "^1.0.1",
         "rollup-plugin-uglify": "^6.0.1",
         "ts-jest": "^23.0.0",
         "ts-node": "^6.0.3",
