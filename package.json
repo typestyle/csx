@@ -46,14 +46,14 @@
     "homepage": "https://github.com/typestyle/csx#readme",
     "devDependencies": {
         "@types/jest": "^23.3.9",
-        "@types/node": "^10.0.8",
+        "@types/node": "^11.9.0",
         "del-cli": "^1.1.0",
         "jest": "^23.0.1",
-        "rollup": "^0.60.0",
-        "rollup-plugin-typescript": "^0.8.1",
-        "rollup-plugin-uglify": "^4.0.0",
+        "rollup": "^0.67.0",
+        "rollup-plugin-typescript": "^1.0.1",
+        "rollup-plugin-uglify": "^6.0.1",
         "ts-jest": "^24.0.0",
-        "ts-node": "^6.0.3",
+        "ts-node": "^8.0.2",
         "typescript": "^2.8.3"
     },
     "dependencies": {
