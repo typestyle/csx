@@ -46,7 +46,7 @@
     "homepage": "https://github.com/typestyle/csx#readme",
     "devDependencies": {
         "@types/jest": "^23.3.9",
-        "@types/node": "^10.0.8",
+        "@types/node": "^11.9.0",
         "del-cli": "^1.1.0",
         "jest": "^23.0.1",
         "rollup": "^0.60.0",
