@@ -18,7 +18,7 @@ export function quote(val: number | string): string {
  * be converted to a string by necessity, but will look like it is the original type to TypeScript.
  */
 export function important<T>(val: T): T {
-  if (!val && val !== 0) {
+  if (!val && (val as any as number) !== 0) {
     return '' as any as T;
   }
   return `${val.toString()} !important` as any as T;
