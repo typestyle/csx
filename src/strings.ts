@@ -31,3 +31,14 @@ export function important<T>(val: T): T {
 export function url(val: string): string {
   return `url(${val || ''})`;
 }
+
+/**
+ * Returns the value as a string or an empty string if null or undefined.
+ * @param value
+ * @param fallbackValue
+ */
+export function coalesce<T extends number | string>(
+  value: T | undefined
+): string {
+  return !value && value !== 0 ? '' : value.toString();
+}

@@ -29,7 +29,7 @@ describe("csx/background", () => {
   it("returns valid background shorthand for all properties", () => {
     const bkg = background({
         image: 'url("test.jpg")',
-        position: 'center/80%',
+        position: 'center',
         size: '50% auto',
         repeat: 'repeat-x',
         origin: 'padding-box',
@@ -37,14 +37,14 @@ describe("csx/background", () => {
         attachment: 'fixed',
         color: 'red'
     });
-    assert.equal(bkg, 'url("test.jpg") center/80% 50% auto repeat-x padding-box text fixed red');
+    assert.equal(bkg, 'url("test.jpg") center/50% auto repeat-x padding-box text fixed red');
   });
 
   it("returns valid background shorthand for multiple backgrounds", () => {
     const bkg = background(
         {
             image: 'url("test.jpg")',
-            position: 'center/80%',
+            position: 'center',
             size: '50% auto',
             repeat: 'repeat-x',
             origin: 'padding-box',
@@ -57,6 +57,6 @@ describe("csx/background", () => {
             image: 'url("test.jpg")',
             repeat: 'repeat-y'
         });
-    assert.equal(bkg, 'url("test.jpg") center/80% 50% auto repeat-x padding-box text fixed red,url("test.jpg") repeat-y green');
+    assert.equal(bkg, 'url("test.jpg") center/50% auto repeat-x padding-box text fixed red, url("test.jpg") repeat-y green');
   });
 });

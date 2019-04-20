@@ -1,8 +1,5 @@
-import { List, CsxBackgroundOptions } from './types'; 
-import { isDefined, isNotEmpty } from './utils/inspect';
-import { map } from './utils/arrays';
-
-
+import { CsxBackgroundOptions, CsxBackgroundWithSizeOptions } from './types';
+import { coalesce } from '.';
 
 /**
  * Creates a `background` shorthand value. You can supply multiple backgrounds, but the `background-color` can only be defined on the last background, as there is only one background color for an element.
@@ -10,20 +7,23 @@ import { map } from './utils/arrays';
  */
 export function background(...backgrounds: CsxBackgroundOptions[]): string;
 export function background(): string {
-    return map(arguments as List<CsxBackgroundOptions>, (background: CsxBackgroundOptions) => {
-        return [
-            background.image,
-            background.position,
-            background.size,
-            background.repeat,
-            background.origin,
-            background.clip,
-            background.attachment,
-            background.color
-        ]
-            .filter(isDefined)
-            .join(' ');
-    })
-        .filter(isNotEmpty)
-        .join(',');
+    let output = '';
+    for (let i = 0; i < arguments.length; i++) {
+        const background = arguments[i] as CsxBackgroundOptions;
+        const backgroundSize = (background as CsxBackgroundWithSizeOptions).size
+            ? '/' + (background as CsxBackgroundWithSizeOptions).size
+            : '';
+        const backgroundParts = [
+            output.length ? ',' : '',
+            coalesce(background.image),
+            coalesce(background.position) + backgroundSize,
+            coalesce(background.repeat),
+            coalesce(background.origin),
+            coalesce(background.clip),
+            coalesce(background.attachment),
+            coalesce(background.color),
+        ];
+        output += backgroundParts.filter(Boolean).join(' ');
+    }
+    return output;
 }
