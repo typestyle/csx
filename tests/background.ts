@@ -59,4 +59,13 @@ describe("csx/background", () => {
         });
     assert.equal(bkg, 'url("test.jpg") center/50% auto repeat-x padding-box text fixed red, url("test.jpg") repeat-y green');
   });
+
+  it("returns valid background shorthand for more than two backgrounds", () => {
+    const bkg = background(
+        { color: 'red' },
+        { color: 'yellow' },
+        { color: 'green' }
+    );
+    assert.equal(bkg, 'red, yellow, green');
+  });
 });

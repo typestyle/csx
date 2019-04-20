@@ -14,7 +14,6 @@ export function background(): string {
             ? '/' + (background as CsxBackgroundWithSizeOptions).size
             : '';
         const backgroundParts = [
-            output.length ? ',' : '',
             coalesce(background.image),
             coalesce(background.position) + backgroundSize,
             coalesce(background.repeat),
@@ -23,7 +22,8 @@ export function background(): string {
             coalesce(background.attachment),
             coalesce(background.color),
         ];
-        output += backgroundParts.filter(Boolean).join(' ');
+        const backgroundString = backgroundParts.filter(Boolean).join(' ');
+        output += (output.length && backgroundString ? ', ' : '') + backgroundString;
     }
     return output;
 }
