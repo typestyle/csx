@@ -1,6 +1,6 @@
 {
     "name": "csx",
-    "version": "9.0.0",
+    "version": "9.0.1",
     "description": "Utility functions for TypeStyle",
     "main": "./lib/index.js",
     "module": "./lib.es2015/index.js",
