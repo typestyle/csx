@@ -8,6 +8,7 @@ export * from './border';
 export * from './color';
 export * from './gradient';
 export * from './lists';
+export * from './padding';
 export * from './strings';
 export * from './transforms';
 export * from './units';
