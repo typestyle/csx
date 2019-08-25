@@ -27,7 +27,7 @@ describe("csx/list", () => {
       rgb(255, 255, 0),
       hsl(100, .5, .5)
     );
-    assert.equal(colorList, 'rgb(255,255,0),hsl(100,50%,50%)');
+    assert.equal(colorList, 'rgb(255, 255, 0),hsl(100, 50%, 50%)');
   });
 
   it("removes empty entries", () => {
@@ -47,7 +47,7 @@ describe("csx/list", () => {
       linearGradient('top', 'red', 'blue'),
       linearGradient('bottom', 'blue', 'red')
     );
-    assert.equal(imageList, 'linear-gradient(top,red,blue),linear-gradient(bottom,blue,red)');
+    assert.equal(imageList, 'linear-gradient(top, red, blue),linear-gradient(bottom, blue, red)');
   });
 
   it("supports multiple helper types", () => {
@@ -55,6 +55,6 @@ describe("csx/list", () => {
       linearGradient('top', 'red', 'blue'),
       rgb(255, 255, 0).toString()
     );
-    assert.equal(imageList, 'linear-gradient(top,red,blue),rgb(255,255,0)');
+    assert.equal(imageList, 'linear-gradient(top, red, blue),rgb(255, 255, 0)');
   });
 });

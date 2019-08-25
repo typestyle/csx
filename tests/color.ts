@@ -15,50 +15,50 @@ describe('color', () => {
     describe('toString()', () => {
         it('handles named colors', () => {
             const c1 = red.toString();
-            assert.equal(c1, 'rgb(255,0,0)');
+            assert.equal(c1, 'rgb(255, 0, 0)');
         });
 
         it('handles transparency', () => {
             const c1 = transparent.toString();
-            assert.equal(c1, 'rgba(0,0,0,0)');
+            assert.equal(c1, 'rgba(0, 0, 0, 0)');
         });
 
         it('truncates alpha channel values to the 5th decimal', () => {
             const c1 = rgba(255, 242, 216, 0.49);
-            assert.equal(c1.toString(), 'rgba(255,242,216,0.49)');
+            assert.equal(c1.toString(), 'rgba(255, 242, 216, 0.49)');
         });
 
         it('truncates alpha channel repeating values to the 5th decimal', () => {
             const c1 = rgba(255, 242, 216, 1 / 3);
-            assert.equal(c1.toString(), 'rgba(255,242,216,0.33333)');
+            assert.equal(c1.toString(), 'rgba(255, 242, 216, 0.33333)');
         });
     });
 
     describe('rgb()', () => {
         it('handles rgb with numbers', () => {
             const color = rgb(255, 0, 0).toString();
-            assert.equal(color, 'rgb(255,0,0)');
+            assert.equal(color, 'rgb(255, 0, 0)');
         });
 
         it('rounds channels to the nearest integer', () => {
             const color = rgb(100.5, 100.3, -1).toString();
-            assert.equal(color, 'rgb(101,100,0)');
+            assert.equal(color, 'rgb(101, 100, 0)');
         });
     });
 
     describe('rgba()', () => {
         it('handles rgba with numbers', () => {
             const color = rgba(255, 0, 0, 1).toString();
-            assert.equal(color, 'rgba(255,0,0,1)');
+            assert.equal(color, 'rgba(255, 0, 0, 1)');
         });
 
         it('handles rgba with percent string', () => {
             const color = rgba(255, 0, 0, '80%').toString();
-            assert.equal(color, 'rgba(255,0,0,0.8)');
+            assert.equal(color, 'rgba(255, 0, 0, 0.8)');
         });
         it('rounds channels to the nearest integer', () => {
             const color = rgba(100.5, 100.3, -1, 0.5).toString();
-            assert.equal(color, 'rgba(101,100,0,0.5)');
+            assert.equal(color, 'rgba(101, 100, 0, 0.5)');
         });
     });
 
@@ -79,33 +79,33 @@ describe('color', () => {
 
         it('handles hsl with percent strings', () => {
             const color = hsl(0, '100%', '50%').toString();
-            assert.equal(color, 'hsl(0,100%,50%)');
+            assert.equal(color, 'hsl(0, 100%, 50%)');
         });
 
         it('handles hsl with percent numbers', () => {
             const color = hsl(0, 1, 0.5).toString();
-            assert.equal(color, 'hsl(0,100%,50%)');
+            assert.equal(color, 'hsl(0, 100%, 50%)');
         });
         it('rounds hue to the nearest integer', () => {
             const color = hsl(100.5, 0.5, 0.5).toString();
-            assert.equal(color, 'hsl(101,50%,50%)');
+            assert.equal(color, 'hsl(101, 50%, 50%)');
         });
     });
 
     describe('hsla()', () => {
         it('handles hsla with percent numbers', () => {
             const color = hsla(0, 1, 0.5, 0.1).toString();
-            assert.equal(color, 'hsla(0,100%,50%,0.1)');
+            assert.equal(color, 'hsla(0, 100%, 50%, 0.1)');
         });
 
         it('handles hsla with percent strings', () => {
             const color = hsla(0, '100%', '50%', 0.1).toString();
-            assert.equal(color, 'hsla(0,100%,50%,0.1)');
+            assert.equal(color, 'hsla(0, 100%, 50%, 0.1)');
         });
 
         it('rounds hue to the nearest integer', () => {
             const color = hsla(100.5, 0.5, 0.5, 0).toString();
-            assert.equal(color, 'hsla(101,50%,50%,0)');
+            assert.equal(color, 'hsla(101, 50%, 50%, 0)');
         });
     });
 

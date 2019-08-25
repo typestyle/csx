@@ -21,13 +21,13 @@ describe('transform()', () => {
 describe('matrix()', () => { 
     it('matrix is output to string', () => {
         const value = csx.matrix(0, 1, 2, 3, 4, 5);
-        assert.equal(value, 'matrix(0,1,2,3,4,5)');
+        assert.equal(value, 'matrix(0, 1, 2, 3, 4, 5)');
     })
 });
 describe('matrix3d()', () => { 
     it('matrix3d is output to string', () => {
         const value = csx.matrix3d(0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5);
-        assert.equal(value, 'matrix3d(0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5)');
+        assert.equal(value, 'matrix3d(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5)');
     })
 });
 describe('perspective()', () => { 
@@ -45,7 +45,7 @@ describe('rotate()', () => {
 describe('rotate3d()', () => { 
     it('rotate3d is output to string', () => {
         const value = csx.rotate3d(0, 0, '0.5turn');
-        assert.equal(value, 'rotate3d(0,0,0.5turn)');
+        assert.equal(value, 'rotate3d(0, 0, 0.5turn)');
     })
 });
 describe('rotateX()', () => { 
@@ -74,13 +74,13 @@ describe('scale()', () => {
 
     it('scale(x,y) is output to string', () => {
         const value = csx.scale(1, 2);
-        assert.equal(value, 'scale(1,2)');
+        assert.equal(value, 'scale(1, 2)');
     })
 });
 describe('scale3d()', () => { 
     it('scale3d is output to string', () => {
         const value = csx.scale3d(0, 0, 2);
-        assert.equal(value, 'scale3d(0,0,2)');
+        assert.equal(value, 'scale3d(0, 0, 2)');
     })
 });
 describe('scaleX()', () => { 
@@ -126,13 +126,13 @@ describe('translate()', () => {
     })
     it('translate(x,y) is output to string', () => {
         const value = csx.translate('20px', '30px');
-        assert.equal(value, 'translate(20px,30px)');
+        assert.equal(value, 'translate(20px, 30px)');
     })
 });
 describe('translate3d()', () => { 
     it('translate3d is output to string', () => {
         const value = csx.translate3d(0, 0, '20em');
-        assert.equal(value, 'translate3d(0,0,20em)');
+        assert.equal(value, 'translate3d(0, 0, 20em)');
     })
 });
 describe('translateX()', () => { 

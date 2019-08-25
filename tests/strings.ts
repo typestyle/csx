@@ -16,7 +16,7 @@ describe("csx/important", () => {
 
     it("converts helpers to string", () => {
         const importantColor = important(rgb(255, 0, 0).toString());
-        assert.equal(importantColor, 'rgb(255,0,0) !important');
+        assert.equal(importantColor, 'rgb(255, 0, 0) !important');
     });
 });
 

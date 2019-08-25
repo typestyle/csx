@@ -47,7 +47,7 @@ export function parseCSSFunction(stringValue: string): string[] | undefined {
 }
 
 export function cssFunction(functionName: string, params: List<string|number>): string {
-  const parts = Array.prototype.join.call(params, ',');
+  const parts = Array.prototype.join.call(params, ', ');
   return `${functionName}(${parts})`;
 }
 
