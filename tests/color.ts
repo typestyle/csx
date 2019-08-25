@@ -44,6 +44,11 @@ describe('color', () => {
             const color = rgb(100.5, 100.3, -1).toString();
             assert.equal(color, 'rgb(101, 100, 0)');
         });
+
+        it('uses the alpha channel if specified.', () => {
+            const color = rgb(255, 0, 0, 0.5).toString();
+            assert.equal(color, 'rgba(255, 0, 0, 0.5)');
+        });
     });
 
     describe('rgba()', () => {
@@ -89,6 +94,10 @@ describe('color', () => {
         it('rounds hue to the nearest integer', () => {
             const color = hsl(100.5, 0.5, 0.5).toString();
             assert.equal(color, 'hsl(101, 50%, 50%)');
+        });
+        it('uses the alpha channel if specified.', () => {
+            const color = hsl(100.5, 0.5, 0.5, 0.5).toString();
+            assert.equal(color, 'hsla(101, 50%, 50%, 0.5)');
         });
     });
 

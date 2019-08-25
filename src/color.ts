@@ -33,27 +33,55 @@ export function color(value: ColorProperty): ColorHelper {
 
 /**
  * Creates a color from hue, saturation, and lightness.  Alpha is automatically set to 100%
+ * @param hue The hue of the color. This should be a number between 0-360.
+ * @param saturation The saturation of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
+ * @param lightness The lightness of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
+ * @param alpha The alpha of the color. This should be a number between 0-1 or a percentage string between 0%-100%. If not specified, this defaults to 1.
  */
-export function hsl(hue: number, saturation: string | number, lightness: string | number): ColorHelper {
-    return new ColorHelper(HSL, modDegrees(hue), ensurePercent(saturation), ensurePercent(lightness), 1, false);
+export function hsl(hue: number, saturation: string | number, lightness: string | number, alpha?: string | number): ColorHelper {
+    return new ColorHelper(
+        HSL,
+         modDegrees(hue), 
+         ensurePercent(saturation), 
+         ensurePercent(lightness), 
+         (alpha === undefined ? 1 : ensurePercent(alpha)),
+         alpha !== undefined /* hasAlpha*/);
 }
 
 /**
  * Creates a color from hue, saturation, lightness, and alpha
+ * @param hue The hue of the color. This should be a number between 0-360.
+ * @param saturation The saturation of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
+ * @param lightness The lightness of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
+ * @param alpha The alpha of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
  */
-export function hsla(hue: number, saturation: string | number, lightness: string | number, opacity: string | number): ColorHelper {
-    return new ColorHelper(HSL, modDegrees(hue), ensurePercent(saturation), ensurePercent(lightness), ensurePercent(opacity), true);
+export function hsla(hue: number, saturation: string | number, lightness: string | number, alpha: string | number): ColorHelper {
+    return new ColorHelper(HSL, modDegrees(hue), ensurePercent(saturation), ensurePercent(lightness), ensurePercent(alpha), true);
 }
 
 /**
  * Creates a color form the red, blue, and green color space.  Alpha is automatically set to 100%
+ * @param red The red channel of the color. This should be a number between 0-255.
+ * @param blue The blue channel of the color. This should be a number between 0-255.
+ * @param green The green channel of the color. This should be a number between 0-255.
+ * @param alpha The alpha of the color. This should be a number between 0-1 or a percentage string between 0%-100%. If not specified, this defaults to 1.
  */
-export function rgb(red: number, blue: number, green: number): ColorHelper {
-    return new ColorHelper(RGB, red, blue, green, 1, false);
+export function rgb(red: number, blue: number, green: number, alpha?: string | number): ColorHelper {
+    return new ColorHelper(
+        RGB,
+        red,
+        blue,
+        green,
+        (alpha === undefined ? 1 : ensurePercent(alpha)),
+        alpha !== undefined /* hasAlpha*/);
 }
 
 /**
  * Creates a color form the red, blue, green, and alpha in the color space
+ * @param red The red channel of the color. This should be a number between 0-255.
+ * @param blue The blue channel of the color. This should be a number between 0-255.
+ * @param green The green channel of the color. This should be a number between 0-255.
+ * @param alpha The alpha of the color. This should be a number between 0-1 or a percentage string between 0%-100%.
  */
 export function rgba(red: number, blue: number, green: number, alpha: string | number): ColorHelper {
     return new ColorHelper(RGB, red, blue, green, ensurePercent(alpha), true);
