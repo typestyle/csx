@@ -17,6 +17,11 @@ export const deg = formatUnit<CSSAngle>('deg');
 export const em = formatUnit<CSSLength>('em');
 
 /**
+ * Returns the number with a suffix of ex
+ */
+export const ex = formatUnit<CSSLength>('ex');
+
+/**
  * Returns the number with a suffix of px
  */
 export const px = formatUnit<CSSLength>('px');
