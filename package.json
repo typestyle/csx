@@ -48,7 +48,7 @@
         "@types/jest": "^24.0.0",
         "@types/node": "^13.1.0",
         "deep-extend": "0.6.0",
-        "del-cli": "^2.0.0",
+        "del-cli": "^3.0.0",
         "jest": "^24.7.1",
         "rollup": "^1.19.2",
         "rollup-plugin-typescript": "^1.0.1",
