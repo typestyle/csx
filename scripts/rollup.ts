@@ -1,6 +1,6 @@
-import { rollup, RollupFileOptions, OutputOptions, RollupSingleFileBuild } from 'rollup';
+import { rollup, OutputOptions, RollupOptions, RollupBuild } from 'rollup';
 
-const {uglify} = require('rollup-plugin-uglify');
+const { uglify } = require('rollup-plugin-uglify');
 const typescript = require('rollup-plugin-typescript');
 
 const compressOptions = {
@@ -31,7 +31,7 @@ const compressOptions = {
 };
 
 /** handles writing out statuses and writing bundle */
-async function write(bundle: RollupSingleFileBuild, options: OutputOptions) {
+async function write(bundle: RollupBuild, options: OutputOptions) {
     try {
         await bundle.write(options);
         console.log('\u2713 ' + options.file);
@@ -41,7 +41,7 @@ async function write(bundle: RollupSingleFileBuild, options: OutputOptions) {
     }
 }
 
-async function bundle(inputOptions: RollupFileOptions, outputOptions: OutputOptions) {
+async function bundle(inputOptions: RollupOptions, outputOptions: OutputOptions) {
     const bundleObj = await rollup(inputOptions);
     await write(bundleObj, outputOptions);
 }
